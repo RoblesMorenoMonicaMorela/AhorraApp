@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import TransaccionesScreen from './TransaccionesScreen';
 import AgregarTransaccionScreen from './AgregarTransaccionScreen';
 import ListadoTransaccionesScreen from './ListadoTransaccionesScreen';
+import GraficasScreen from './GraficasScreen';
 import MainScreen from './MainScreen';
 import RegistroScreen from './RegistroScreen';
 import EditarTransaccionScreen from './EditarTransaccionScreen';
