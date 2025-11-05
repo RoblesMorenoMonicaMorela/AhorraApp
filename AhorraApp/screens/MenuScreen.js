@@ -93,6 +93,7 @@ export default function MenuScreen() {
               color="#4A90E2"
             />
           </View>
+          
           <View style={styles.botonera}>
             <Button
               title="Pantalla Agregar Transacción (Form)"
