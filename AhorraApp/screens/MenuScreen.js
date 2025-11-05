@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import TransaccionesScreen from './TransaccionesScreen';
 import AgregarTransaccionScreen from './AgregarTransaccionScreen';
 import ListadoTransaccionesScreen from './ListadoTransaccionesScreen';
+import GraficasScreen from './GraficasScreen';
 import MainScreen from './MainScreen';
 
 export default function MenuScreen() {
@@ -16,7 +17,9 @@ export default function MenuScreen() {
       return <AgregarTransaccionScreen />; 
     case 'listado':
       return <ListadoTransaccionesScreen />;  
-      case 'main':
+    case 'graficas':
+      return <GraficasScreen />; 
+    case 'main':
       return <MainScreen />;  
     case 'menu':
     default:
@@ -29,6 +32,7 @@ export default function MenuScreen() {
             <Button title="Pantalla Transacciones (Resumen)"onPress={() => setScreen('transacciones')}color="#4A90E2"/>
             <Button title="Pantalla Agregar Transacción (Form)" onPress={() => setScreen('agregar')}color="#4A90E2"/>
             <Button title="Pantalla Listado Transacciones" onPress={() => setScreen('listado')}color="#4A90E2"/>
+            <Button title="Pantalla Graficas" onPress={() => setScreen('graficas')}color="#4A90E2"/>
               <Button title="Pantalla Main" onPress={() => setScreen('main')}color="#4A90E2"/>
           </View>
         </ScrollView>
