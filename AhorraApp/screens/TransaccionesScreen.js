@@ -1,12 +1,15 @@
 import React from 'react';
-import {View,Text,StyleSheet,TouchableOpacity, Image} from 'react-native';
+import {View,Text,StyleSheet,TouchableOpacity, Image,SafeAreaView} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
 const LOGO_APP_IMAGE = require('../assets/recursos/Ahorro.png'); 
 
 export default function TransaccionesScreen(){
     return(
-        <View style={styles.container}> 
+    <SafeAreaView style={styles.container}>
+        {/* <View style={styles.container}>  */}
+        
         <Image 
           source={LOGO_APP_IMAGE} 
           style={styles.logo} 
@@ -38,8 +41,16 @@ export default function TransaccionesScreen(){
       <TouchableOpacity style={styles.botonPrincipal} onPress={() => {}}>
         <Text style={styles.botonPrincipalTexto}>Continuar</Text>
       </TouchableOpacity>
-
-    </View>
+  
+      <View style={styles.bottomNav}>
+              <Icon name="home" size={28} color="#9CA3AF" />
+              <Icon name="calendar-blank" size={28} color="#9CA3AF" />
+              <Icon name="heart" size={28} color="#9CA3AF" />
+              <Icon name="account" size={28} color="#9CA3AF" />
+            </View>
+          </SafeAreaView>
+  /*   </View> */
+    
     );
 }
 
@@ -50,6 +61,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
+  },
+  container1: {
+    flex: 1,
+    backgroundColor: '#F5F5F5',
   },
   logo: {
     width: 80, 
@@ -115,6 +130,19 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  bottomNav: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+    paddingVertical: 15,
+    borderTopWidth: 1,
+    borderTopColor: '#E5E7EB',
   },
 });
 

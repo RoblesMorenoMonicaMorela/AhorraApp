@@ -1,10 +1,14 @@
 import React from 'react';
-import { View, Text,StyleSheet,ScrollView,TextInput,TouchableOpacity,Alert } from 'react-native';
+import {View,Text,StyleSheet,ScrollView,TextInput,TouchableOpacity,Alert,SafeAreaView, } from 'react-native';
+
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 const mostrarAlertaEliminar = () => {
-  Alert.alert('Atención', 
-    '¿Seguro que deseas eliminar esta transacción?', 
+  Alert.alert(
+    'Atención',
+    '¿Seguro que deseas eliminar esta transacción?',
     [
-      { text: 'Cancelar', style: 'cancel' }, 
+      { text: 'Cancelar', style: 'cancel' },
       { text: 'Aceptar', onPress: () => {} },
     ]
   );
@@ -36,69 +40,86 @@ const ItemTransaccion = ({ categoria, fecha, monto, tipo }) => {
       </View>
     </View>
   );
-}
+};
 export default function ListadoTransaccionesScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.titulo}>Listado de Transacciones</Text>
-      <View style={styles.filtrosContainer}>
-        <TextInput
-          style={styles.inputFiltro}
-          placeholder="Filtrar por Categoría"
-          placeholderTextColor="#718096"
-        />
-        <TextInput
-          style={styles.inputFiltro}
-          placeholder="Filtrar por Fecha"
-          placeholderTextColor="#718096"
-        />
-        <TouchableOpacity style={styles.botonPrincipal} onPress={() => {}}>
-          <Text style={styles.botonPrincipalTexto}>Buscar Transacción</Text>
-        </TouchableOpacity>
+  
+    <SafeAreaView style={styles.safeAreaContainer}>
+    
+      <View style={styles.container}>
+        <Text style={styles.titulo}>Listado de Transacciones</Text>
+        <View style={styles.filtrosContainer}>
+          <TextInput
+            style={styles.inputFiltro}
+            placeholder="Filtrar por Categoría"
+            placeholderTextColor="#718096"
+          />
+          <TextInput
+            style={styles.inputFiltro}
+            placeholder="Filtrar por Fecha"
+            placeholderTextColor="#718096"
+          />
+          <TouchableOpacity style={styles.botonPrincipal} onPress={() => {}}>
+            <Text style={styles.botonPrincipalTexto}>Buscar Transacción</Text>
+          </TouchableOpacity>
+        </View>
+
+        <ScrollView style={styles.scroll}>
+          <ItemTransaccion
+            categoria="Comida"
+            fecha="2025-10-30"
+            monto={25.5}
+            tipo="gasto"
+          />
+          <ItemTransaccion
+            categoria="Salario"
+            fecha="2025-10-29"
+            monto={1200.0}
+            tipo="ingreso"
+          />
+          <ItemTransaccion
+            categoria="Transporte"
+            fecha="2025-10-28"
+            monto={15.0}
+            tipo="gasto"
+          />
+          <ItemTransaccion
+            categoria="Ocio"
+            fecha="2025-10-27"
+            monto={50.0}
+            tipo="gasto"
+          />
+          <ItemTransaccion
+            categoria="Venta"
+            fecha="2025-10-26"
+            monto={75.0}
+            tipo="ingreso"
+          />
+        </ScrollView>
       </View>
 
-      <ScrollView style={styles.scroll}>
-        <ItemTransaccion
-          categoria="Comida"
-          fecha="2025-10-30"
-          monto={25.5}
-          tipo="gasto"
-        />
-        <ItemTransaccion
-          categoria="Salario"
-          fecha="2025-10-29"
-          monto={1200.0}
-          tipo="ingreso"
-        />
-        <ItemTransaccion
-          categoria="Transporte"
-          fecha="2025-10-28"
-          monto={15.0}
-          tipo="gasto"
-        />
-        <ItemTransaccion
-          categoria="Ocio"
-          fecha="2025-10-27"
-          monto={50.0}
-          tipo="gasto"
-        />
-        <ItemTransaccion
-          categoria="Venta"
-          fecha="2025-10-26"
-          monto={75.0}
-          tipo="ingreso"
-        />
-      </ScrollView>
-    </View>
+      <View style={styles.bottomNav}>
+        <Icon name="home" size={28} color="#9CA3AF" />
+        <Icon name="calendar-blank" size={28} color="#9CA3AF" />
+        <Icon name="heart" size={28} color="#9CA3AF" />
+        <Icon name="account" size={28} color="#9CA3AF" />
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+
+  safeAreaContainer: {
     flex: 1,
     backgroundColor: '#F4F8FF',
-    padding: 20,
+  },
+  container: {
+    flex: 1, 
+    backgroundColor: '#F4F8FF',
+    paddingHorizontal: 20, 
     paddingTop: 60,
+    paddingBottom: 80, 
   },
   titulo: {
     fontSize: 28,
@@ -124,7 +145,6 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
   },
-
   itemCard: {
     backgroundColor: '#FFFFFF',
     padding: 15,
@@ -169,7 +189,7 @@ const styles = StyleSheet.create({
   accionTexto: {
     fontSize: 12,
     color: '#4A90E2',
-    marginLeft: 10, 
+    marginLeft: 10,
     fontWeight: '600',
   },
   botonPrincipal: {
@@ -184,5 +204,15 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+
+  bottomNav: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+    paddingVertical: 15,
+    borderTopWidth: 1,
+    borderTopColor: '#E5E7EB',
   },
 });

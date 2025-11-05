@@ -1,83 +1,119 @@
 import React, { useState } from 'react';
-import {View,Text,TextInput,StyleSheet,TouchableOpacity, ScrollView} from 'react-native';
+import { View, Text,TextInput,StyleSheet,TouchableOpacity,ScrollView,SafeAreaView,} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default function EditarTransaccionScreen() {
-
   const [tipo, setTipo] = useState('gasto');
 
   return (
-    <ScrollView
-      style={styles.scrollContainer}
-      contentContainerStyle={styles.container}>
-    
-      <Text style={styles.titulo}>Editar Transacción</Text>
+    <SafeAreaView style={styles.safeAreaContainer}>
+      <ScrollView
+        style={styles.scrollContainer}
+        contentContainerStyle={styles.container}>
+        <Text style={styles.titulo}>Editar Transacción</Text>
 
-     
-      <Text style={styles.label}>Tipo de Transacción</Text>
-      <View style={styles.selectorContainer}>
-        <TouchableOpacity
-          style={[styles.selectorBoton,tipo === 'gasto'? styles.selectorActivoGasto: styles.selectorInactivo,]}onPress={() => setTipo('gasto')}>
-          <Text style={[tipo === 'gasto'? styles.selectorTextoActivo: styles.selectorTextoInactivo,]}>Gasto</Text>
+        <Text style={styles.label}>Tipo de Transacción</Text>
+        <View style={styles.selectorContainer}>
+          <TouchableOpacity
+            style={[
+              styles.selectorBoton,
+              tipo === 'gasto'
+                ? styles.selectorActivoGasto
+                : styles.selectorInactivo,
+            ]}
+            onPress={() => setTipo('gasto')}>
+            <Text
+              style={[
+                tipo === 'gasto'
+                  ? styles.selectorTextoActivo
+                  : styles.selectorTextoInactivo,
+              ]}>
+              Gasto
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              styles.selectorBoton,
+              tipo === 'ingreso'
+                ? styles.selectorActivoIngreso
+                : styles.selectorInactivo,
+            ]}
+            onPress={() => setTipo('ingreso')}>
+            <Text
+              style={[
+                tipo === 'ingreso'
+                  ? styles.selectorTextoActivo
+                  : styles.selectorTextoInactivo,
+              ]}>
+              Ingreso
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        <Text style={styles.label}>Monto</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="$0.00"
+          keyboardType="numeric"
+          placeholderTextColor="#718096"
+          value="25.50"
+        />
+
+        <Text style={styles.label}>Categoría</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Ej: Alimentación, Transporte..."
+          placeholderTextColor="#718096"
+          value="Comida"
+        />
+
+        <Text style={styles.label}>Fecha</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="YYYY-MM-DD"
+          placeholderTextColor="#718096"
+          value="2025-10-30"
+        />
+
+        <Text style={styles.label}>Descripción (Opcional)</Text>
+        <TextInput
+          style={[styles.input, styles.multilineInput]}
+          placeholder="Ej: Café con amigos..."
+          multiline={true}
+          numberOfLines={3}
+          placeholderTextColor="#718096"
+          value="Era un café y un pastel."
+        />
+
+        <TouchableOpacity style={styles.botonPrincipal} onPress={() => {}}>
+          <Text style={styles.botonPrincipalTexto}>Actualizar Transacción</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.selectorBoton,tipo === 'ingreso'? styles.selectorActivoIngreso: styles.selectorInactivo,]}
-          onPress={() => setTipo('ingreso')}>
-          <Text style={[tipo === 'ingreso'? styles.selectorTextoActivo: styles.selectorTextoInactivo]}>Ingreso</Text>
-        </TouchableOpacity>
+      </ScrollView>
+
+      <View style={styles.bottomNav}>
+        <Icon name="home" size={28} color="#9CA3AF" />
+        <Icon name="calendar-blank" size={28} color="#9CA3AF" />
+        <Icon name="heart" size={28} color="#9CA3AF" />
+        <Icon name="account" size={28} color="#9CA3AF" />
       </View>
-    
-      <Text style={styles.label}>Monto</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="$0.00"
-        keyboardType="numeric"
-        placeholderTextColor="#718096"
-        value="25.50" 
-      />
-
-      <Text style={styles.label}>Categoría</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Ej: Alimentación, Transporte..."
-        placeholderTextColor="#718096"
-        value="Comida" 
-      />
-
-      <Text style={styles.label}>Fecha</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="YYYY-MM-DD"
-        placeholderTextColor="#718096"
-        value="2025-10-30" 
-      />
-
-      <Text style={styles.label}>Descripción (Opcional)</Text>
-      <TextInput
-        style={[styles.input, styles.multilineInput]}
-        placeholder="Ej: Café con amigos..."
-        multiline={true}
-        numberOfLines={3}
-        placeholderTextColor="#718096"
-        value="Era un café y un pastel." 
-      />
-
-      <TouchableOpacity style={styles.botonPrincipal} onPress={() => {}}>
-        <Text style={styles.botonPrincipalTexto}>Actualizar Transacción</Text>
-      </TouchableOpacity>
-    </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  scrollContainer: {
+  safeAreaContainer: {
     flex: 1,
     backgroundColor: '#F4F8FF',
+  },
+  scrollContainer: {
+    flex: 1,
   },
   container: {
     flexGrow: 1,
     alignItems: 'center',
     padding: 20,
     paddingTop: 60,
+    paddingBottom: 100, // Espacio para el Nav Bar
   },
   titulo: {
     fontSize: 28,
@@ -151,5 +187,14 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  bottomNav: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+    paddingVertical: 15,
+    borderTopWidth: 1,
+    borderTopColor: '#E5E7EB',
   },
 });
