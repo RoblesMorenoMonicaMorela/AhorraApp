@@ -6,7 +6,9 @@ import AgregarTransaccionScreen from './AgregarTransaccionScreen';
 import ListadoTransaccionesScreen from './ListadoTransaccionesScreen';
 import GraficasScreen from './GraficasScreen';
 import MainScreen from './MainScreen';
-
+import RegistroScreen from './RegistroScreen';
+import EditarTransaccionScreen from './EditarTransaccionScreen';
+import OlvidarContraScreen from './OlvidarContraScreen';
 export default function MenuScreen() {
   const [screen, setScreen] = useState('menu');
   switch (screen) {
@@ -21,6 +23,12 @@ export default function MenuScreen() {
       return <GraficasScreen />; 
     case 'main':
       return <MainScreen />;  
+    case 'registro':
+      return <RegistroScreen />;  
+    case 'contra':
+      return <OlvidarContraScreen />; 
+
+
     case 'menu':
     default:
       return (
@@ -33,7 +41,7 @@ export default function MenuScreen() {
             <Button title="Pantalla Agregar Transacción (Form)" onPress={() => setScreen('agregar')}color="#4A90E2"/>
             <Button title="Pantalla Listado Transacciones" onPress={() => setScreen('listado')}color="#4A90E2"/>
             <Button title="Pantalla Graficas" onPress={() => setScreen('graficas')}color="#4A90E2"/>
-              <Button title="Pantalla Main" onPress={() => setScreen('main')}color="#4A90E2"/>
+            <Button title="Pantalla Main" onPress={() => setScreen('main')}color="#4A90E2"/>
           </View>
         </ScrollView>
       );
