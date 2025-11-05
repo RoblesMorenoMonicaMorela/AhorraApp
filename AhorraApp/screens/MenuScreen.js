@@ -7,6 +7,7 @@ import ListadoTransaccionesScreen from './ListadoTransaccionesScreen';
 import MainScreen from './MainScreen';
 import RegistroScreen from './RegistroScreen';
 import EditarTransaccionScreen from './EditarTransaccionScreen';
+import OlvidarContraScreen from './OlvidarContraScreen';
 export default function MenuScreen() {
   const [screen, setScreen] = useState('menu');
   switch (screen) {
@@ -23,6 +24,10 @@ export default function MenuScreen() {
       return <MainScreen />;  
     case 'registro':
       return <RegistroScreen />;  
+    case 'contra':
+      return <OlvidarContraScreen />; 
+
+
     case 'menu':
     default:
       return (
@@ -37,6 +42,7 @@ export default function MenuScreen() {
             <Button title="Pantalla Editar Transaccion" onPress={() => setScreen('editartrans')}color="#4A90E2"/>
             <Button title="Pantalla Main" onPress={() => setScreen('main')}color="#4A90E2"/>
             <Button title="Pantalla Registro" onPress={() => setScreen('registro')}color="#4A90E2"/>
+            <Button title="Pantalla Olvidar Contraseña" onPress={() => setScreen('contra')}color="#4A90E2"/>
             
           </View>
         </ScrollView>
