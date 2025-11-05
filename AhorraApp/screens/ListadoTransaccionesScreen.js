@@ -1,5 +1,14 @@
 import React from 'react';
-import {View,Text,StyleSheet,ScrollView,TextInput,TouchableOpacity} from 'react-native';
+import { View, Text,StyleSheet,ScrollView,TextInput,TouchableOpacity,Alert } from 'react-native';
+const mostrarAlertaEliminar = () => {
+  Alert.alert('Atención', 
+    '¿Seguro que deseas eliminar esta transacción?', 
+    [
+      { text: 'Cancelar', style: 'cancel' }, 
+      { text: 'Aceptar', onPress: () => {} },
+    ]
+  );
+};
 
 const ItemTransaccion = ({ categoria, fecha, monto, tipo }) => {
   return (
@@ -9,69 +18,74 @@ const ItemTransaccion = ({ categoria, fecha, monto, tipo }) => {
         <Text style={styles.itemFecha}>{fecha}</Text>
       </View>
       <View style={styles.itemLadoDerecho}>
-        <Text style={[styles.itemMonto,tipo === 'ingreso' ? styles.ingreso : styles.gasto]}>{tipo === 'ingreso' ? '+' : '-'}${monto.toFixed(2)}
+        <Text
+          style={[
+            styles.itemMonto,
+            tipo === 'ingreso' ? styles.ingreso : styles.gasto,
+          ]}>
+          {tipo === 'ingreso' ? '+' : '-'}${monto.toFixed(2)}
         </Text>
         <View style={styles.itemAcciones}>
-          <Text style={styles.accionTexto}>Editar</Text>
-          <Text style={[styles.accionTexto, styles.gasto]}>Eliminar</Text>
+          <TouchableOpacity onPress={() => {}}>
+            <Text style={styles.accionTexto}>Editar</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={mostrarAlertaEliminar}>
+            <Text style={[styles.accionTexto, styles.gasto]}>Eliminar</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
   );
-};
-
+}
 export default function ListadoTransaccionesScreen() {
   return (
     <View style={styles.container}>
-
       <Text style={styles.titulo}>Listado de Transacciones</Text>
       <View style={styles.filtrosContainer}>
         <TextInput
           style={styles.inputFiltro}
           placeholder="Filtrar por Categoría"
-          placeholderTextColor="#718096" 
+          placeholderTextColor="#718096"
         />
         <TextInput
           style={styles.inputFiltro}
           placeholder="Filtrar por Fecha"
-          placeholderTextColor="#718096" 
+          placeholderTextColor="#718096"
         />
         <TouchableOpacity style={styles.botonPrincipal} onPress={() => {}}>
-            <Text style={styles.botonPrincipalTexto}>Buscar Transacción</Text>
+          <Text style={styles.botonPrincipalTexto}>Buscar Transacción</Text>
         </TouchableOpacity>
-        
       </View>
 
       <ScrollView style={styles.scroll}>
-        
         <ItemTransaccion
           categoria="Comida"
           fecha="2025-10-30"
-          monto={25.50}
+          monto={25.5}
           tipo="gasto"
         />
         <ItemTransaccion
           categoria="Salario"
           fecha="2025-10-29"
-          monto={1200.00}
+          monto={1200.0}
           tipo="ingreso"
         />
         <ItemTransaccion
           categoria="Transporte"
           fecha="2025-10-28"
-          monto={15.00}
+          monto={15.0}
           tipo="gasto"
         />
         <ItemTransaccion
           categoria="Ocio"
           fecha="2025-10-27"
-          monto={50.00}
+          monto={50.0}
           tipo="gasto"
         />
-         <ItemTransaccion
+        <ItemTransaccion
           categoria="Venta"
           fecha="2025-10-26"
-          monto={75.00}
+          monto={75.0}
           tipo="ingreso"
         />
       </ScrollView>
@@ -82,14 +96,14 @@ export default function ListadoTransaccionesScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F4F8FF', 
+    backgroundColor: '#F4F8FF',
     padding: 20,
-    paddingTop: 60, 
+    paddingTop: 60,
   },
   titulo: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#1A202C', 
+    color: '#1A202C',
     marginBottom: 20,
     textAlign: 'center',
   },
@@ -97,11 +111,11 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   inputFiltro: {
-    backgroundColor: '#FFFFFF', 
+    backgroundColor: '#FFFFFF',
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 8,
-    borderColor: '#E0E0E0', 
+    borderColor: '#E0E0E0',
     borderWidth: 1,
     marginBottom: 10,
     fontSize: 15,
@@ -112,7 +126,7 @@ const styles = StyleSheet.create({
   },
 
   itemCard: {
-    backgroundColor: '#FFFFFF', 
+    backgroundColor: '#FFFFFF',
     padding: 15,
     borderRadius: 10,
     flexDirection: 'row',
@@ -128,11 +142,11 @@ const styles = StyleSheet.create({
   itemCategoria: {
     fontSize: 17,
     fontWeight: '600',
-    color: '#1A202C', 
+    color: '#1A202C',
   },
   itemFecha: {
     fontSize: 13,
-    color: '#718096', 
+    color: '#718096',
     marginTop: 4,
   },
   itemLadoDerecho: {
@@ -143,10 +157,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   ingreso: {
-    color: '#28a745', 
+    color: '#28a745',
   },
   gasto: {
-    color: '#dc3545', 
+    color: '#dc3545',
   },
   itemAcciones: {
     flexDirection: 'row',
@@ -154,19 +168,20 @@ const styles = StyleSheet.create({
   },
   accionTexto: {
     fontSize: 12,
-    color: '#4A90E2', 
-    marginLeft: 10,
+    color: '#4A90E2',
+    marginLeft: 10, 
+    fontWeight: '600',
   },
-    botonPrincipal: {
+  botonPrincipal: {
     width: '100%',
-    backgroundColor: '#a9c7e9ff', 
+    backgroundColor: '#a9c7e9ff',
     padding: 15,
     borderRadius: 8,
     alignItems: 'center',
     marginTop: 10,
   },
   botonPrincipalTexto: {
-    color: '#FFFFFF', 
+    color: '#FFFFFF',
     fontSize: 16,
     fontWeight: 'bold',
   },
