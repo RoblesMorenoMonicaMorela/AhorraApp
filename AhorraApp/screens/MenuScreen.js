@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import TransaccionesScreen from './TransaccionesScreen';
 import AgregarTransaccionScreen from './AgregarTransaccionScreen';
 import ListadoTransaccionesScreen from './ListadoTransaccionesScreen';
-import GraficasScreen from './GraficasScreen';
+import LoginScreen from './LoginScreen';
 import MainScreen from './MainScreen';
 import RegistroScreen from './RegistroScreen';
 import EditarTransaccionScreen from './EditarTransaccionScreen';
@@ -38,6 +38,9 @@ export default function MenuScreen() {
       return <ListadoTransaccionesScreen />;
     case 'editartrans':
       return <EditarTransaccionScreen />;
+    case 'login':
+      return <LoginScreen />;
+    case 'agregar':
     case 'main':
       return <MainScreen />;
     case 'registro':
@@ -85,6 +88,53 @@ export default function MenuScreen() {
         <ScrollView contentContainerStyle={styles.container}>
           <Text style={styles.titulo}>Proyecto: App de Finanzas</Text>
           <Text style={styles.subtitulo}>Menú Principal</Text>
+          <View style={styles.botonera}>
+            <Button
+              title="Pantalla Main"
+              onPress={() => setScreen('main')}
+              color="#4A90E2"
+            />
+          </View>
+
+          <View style={styles.botonera}>
+            <Button
+              title="Pantalla Login"
+              onPress={() => setScreen('login')}
+              color="#4A90E2"
+            />
+          </View>
+
+           <View style={styles.botonera}>
+            <Button
+              title="Pantalla Olvidar Contraseña"
+              onPress={() => setScreen('contra')}
+              color="#4A90E2"
+            />
+          </View>
+
+          <View style={styles.botonera}>
+            <Button
+              title="Pantalla Registro"
+              onPress={() => setScreen('registro')}
+              color="#4A90E2"
+            />
+          </View>
+
+          <View style={styles.botonera}>
+            <Button
+              title="Pantalla Configuracion Inicial"
+              onPress={() => setScreen('confinicial')}
+              color="#4A90E2"
+            />
+          </View>
+
+          <View style={styles.botonera}>
+            <Button
+              title="Pantalla Home"
+              onPress={() => setScreen('home')}
+              color="#4A90E2"
+            />
+          </View>
 
           <View style={styles.botonera}>
             <Button
@@ -115,34 +165,7 @@ export default function MenuScreen() {
               color="#4A90E2"
             />
           </View>
-          <View style={styles.botonera}>
-            <Button
-              title="Pantalla Main"
-              onPress={() => setScreen('main')}
-              color="#4A90E2"
-            />
-          </View>
-          <View style={styles.botonera}>
-            <Button
-              title="Pantalla Configuracion Inicial"
-              onPress={() => setScreen('confinicial')}
-              color="#4A90E2"
-            />
-          </View>
-          <View style={styles.botonera}>
-            <Button
-              title="Pantalla Registro"
-              onPress={() => setScreen('registro')}
-              color="#4A90E2"
-            />
-          </View>
-          <View style={styles.botonera}>
-            <Button
-              title="Pantalla Olvidar Contraseña"
-              onPress={() => setScreen('contra')}
-              color="#4A90E2"
-            />
-          </View>
+          
           <View style={styles.botonera}>
             <Button
               title="Pantalla Presupuesto"
@@ -157,13 +180,7 @@ export default function MenuScreen() {
               color="#4A90E2"
             />
           </View>
-          <View style={styles.botonera}>
-            <Button
-              title="Pantalla Home"
-              onPress={() => setScreen('home')}
-              color="#4A90E2"
-            />
-          </View>
+          
           <View style={styles.botonera}>
             <Button
               title="Pantalla Pagos Programados"

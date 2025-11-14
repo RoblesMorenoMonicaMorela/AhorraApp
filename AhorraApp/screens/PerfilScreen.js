@@ -11,7 +11,7 @@ const mostrarAlertaCerrarSesion = () => {
   ]);
 };
 
-export default function PerfilScreen({ navigation }) {
+export default function PerfilScreen() {
   const profile = {
     name: 'Juan Pérez',
     email: 'juan.perez@email.com',

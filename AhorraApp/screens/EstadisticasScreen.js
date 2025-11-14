@@ -20,7 +20,7 @@ export default function EstadisticasScreen() {
           />
         </View>
 
-        <Text style={styles.title}>Estadísticas de Gastos</Text>
+        <Text style={styles.title}>Estadísticas de Transacciones</Text>
 
         <View style={styles.filterContainer}>
           <Text style={styles.label}>Filtrar por Fecha</Text>
