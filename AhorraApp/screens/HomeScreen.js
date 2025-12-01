@@ -1,222 +1,252 @@
-import React from 'react';
-import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, Image,} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import React, { useState, useCallback } from 'react';
+import { View, Text, StyleSheet, SafeAreaView, FlatList, TouchableOpacity, ActivityIndicator, Image } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { useFocusEffect } from '@react-navigation/native';
+
+// Importar Lógica
+import { useAuth } from '../context/AuthContext';
+import { TransaccionController } from '../controllers/TransaccionController';
 
 const LOGO_APP_IMAGE = require('../assets/recursos/Ahorro.png');
 
-export default function HomeScreen() {
-  const transactions = [
-    { id: 1, category: 'Alimentación', amount: -50.0, icon: 'food' },
-    { id: 2, category: 'Transporte', amount: -20.0, icon: 'car' },
-    { id: 3, category: 'Ocio', amount: -30.0, icon: 'gamepad-variant' },
-  ];
+export default function HomeScreen({ navigation }) {
+  const { user } = useAuth();
+  const controller = new TransaccionController();
 
-  const TransactionItem = ({ category, amount, icon }) => (
-    <TouchableOpacity style={styles.transactionItem}>
-      <View style={styles.transactionLeft}>
-        <View style={styles.iconCircle}>
-          <Icon name={icon} size={20} color="#4A90E2" />
+  const [balance, setBalance] = useState({ ingresos: 0, gastos: 0, total: 0 });
+  const [transacciones, setTransacciones] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const cargarDatos = async () => {
+    if (!user) return;
+    setLoading(true);
+    try {
+      // 1. Obtener todas las transacciones de la BD
+      const lista = await controller.obtenerTodas(user.id);
+      
+      // 2. ORDENAMIENTO ESTRICTO: LO NUEVO HASTA ARRIBA
+      lista.sort((a, b) => {
+        // Convertir string de fecha a objeto Date para comparar
+        const fechaA = new Date(a.fecha);
+        const fechaB = new Date(b.fecha);
+        
+        // Primero comparamos por fecha (descendente)
+        if (fechaB.getTime() !== fechaA.getTime()) {
+          return fechaB - fechaA;
+        }
+        
+        // Si la fecha es igual (mismo día), usamos el ID para desempatar.
+        // El ID más grande es el que se creó al final.
+        return b.id - a.id; 
+      });
+
+      // 3. Guardar en el estado
+      // (Opcional: .slice(0, 10) si solo quieres ver las últimas 10)
+      setTransacciones(lista.slice(0, 20));
+
+      // 4. Calcular el Balance Total (usando toda la lista, no solo la visible)
+      const datosBalance = controller.calcularBalance(lista);
+      setBalance(datosBalance);
+
+    } catch (error) {
+      console.error("Error al cargar Home:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Recargar datos cada vez que la pantalla se enfoca (al volver de agregar/editar)
+  useFocusEffect(
+    useCallback(() => {
+      cargarDatos();
+    }, [])
+  );
+
+  const renderTransaccion = ({ item }) => (
+    <TouchableOpacity 
+      style={styles.cardItem}
+      onPress={() => navigation.navigate('EditarTransaccion', { transaccion: item })}
+    >
+      <View style={styles.cardLeft}>
+        {/* Icono dinámico: Flecha Arriba (Verde) o Abajo (Rojo) */}
+        <View style={[styles.iconCircle, { backgroundColor: item.tipo === 'gasto' ? '#FEE2E2' : '#D1FAE5' }]}>
+          <Ionicons 
+            name={item.tipo === 'gasto' ? 'arrow-down' : 'arrow-up'} 
+            size={20} 
+            color={item.tipo === 'gasto' ? '#EF4444' : '#10B981'} 
+          />
         </View>
-        <Text style={styles.transactionCategory}>{category}</Text>
+        <View>
+          <Text style={styles.cardCategory}>{item.categoria}</Text>
+          <Text style={styles.cardDate}>{item.fecha}</Text>
+        </View>
       </View>
-      <Text style={styles.transactionAmount}>{amount.toFixed(2)} €</Text>
+      
+      {/* Monto con signo + o - */}
+      <Text style={[
+        styles.cardAmount, 
+        { color: item.tipo === 'gasto' ? '#EF4444' : '#10B981' }
+      ]}>
+        {item.tipo === 'gasto' ? '-' : '+'}${item.monto.toFixed(2)}
+      </Text>
     </TouchableOpacity>
+  );
+
+  const HeaderComponent = () => (
+    <>
+      <View style={styles.headerRow}>
+        <View style={{flexDirection:'row', alignItems:'center'}}>
+             <Image source={LOGO_APP_IMAGE} style={{width:40, height:40, marginRight:10}} resizeMode="contain"/>
+             <View>
+                <Text style={styles.welcomeText}>Hola,</Text>
+                <Text style={styles.userName}>{user ? user.nombre : 'Usuario'}</Text>
+             </View>
+        </View>
+        {/* Botón de Configuración Rápida */}
+        <TouchableOpacity onPress={() => navigation.navigate('Personalizar')}> 
+           <Ionicons name="settings-outline" size={26} color="#4A90E2" />
+        </TouchableOpacity>
+      </View>
+
+      {/* Tarjeta Azul de Balance */}
+      <View style={styles.balanceCard}>
+        <Text style={styles.balanceLabel}>Saldo Disponible</Text>
+        <Text style={styles.balanceTotal}>${balance.total.toFixed(2)}</Text>
+        
+        <View style={styles.balanceRow}>
+          <View style={styles.balanceItem}>
+            <Ionicons name="arrow-up-circle" color="#A7F3D0" size={18} />
+            <Text style={styles.balanceSubText}> Ingresos: ${balance.ingresos.toFixed(2)}</Text>
+          </View>
+          <View style={styles.balanceItem}>
+            <Ionicons name="arrow-down-circle" color="#FECACA" size={18} />
+            <Text style={styles.balanceSubText}> Gastos: ${balance.gastos.toFixed(2)}</Text>
+          </View>
+        </View>
+      </View>
+
+      {/* Botones Grandes de Acción */}
+      <View style={{flexDirection: 'row', gap: 10, marginBottom: 20}}>
+        <TouchableOpacity 
+            style={styles.fabButton}
+            onPress={() => navigation.navigate('AgregarTransaccion')}
+        >
+            <Ionicons name="add-circle" size={22} color="#FFF" style={{marginRight:5}} />
+            <Text style={styles.fabText}>Nuevo Movimiento</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity 
+            style={styles.historialButton}
+            onPress={() => navigation.navigate('ListadoTransacciones')}
+        >
+            <Ionicons name="list" size={22} color="#333" style={{marginRight:5}} />
+            <Text style={[styles.fabText, {color: '#333'}]}>Ver Historial</Text>
+        </TouchableOpacity>
+      </View>
+
+      <Text style={styles.sectionTitle}>Últimos Movimientos</Text>
+    </>
   );
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        <Text style={styles.header}>Pag principal</Text>
-
-        <View style={styles.iconContainer}>
-          <Image
-            source={LOGO_APP_IMAGE}
-            style={styles.logoImage}
-            resizeMode="contain"
-          />
-        </View>
-
-        <Text style={styles.greeting}>Hola, Cardenal</Text>
-
-        <View style={styles.summaryContainer}>
-          <View style={styles.summaryCard}>
-            <Text style={styles.summaryLabel}>Ingresos</Text>
-            <Text style={[styles.summaryAmount, styles.incomeAmount]}>
-              +1.200 €
-            </Text>
-          </View>
-
-          <View style={styles.summaryCard}>
-            <Text style={styles.summaryLabel}>Gastos</Text>
-            <Text style={[styles.summaryAmount, styles.expenseAmount]}>
-              -450 €
-            </Text>
-          </View>
-        </View>
-
-        <View style={styles.transactionsContainer}>
-          <View style={styles.transactionsHeader}>
-            <Icon name="credit-card-outline" size={20} color="#6B7280" />
-            <Text style={styles.transactionsTitle}>Transacciones</Text>
-          </View>
-
-          <View style={styles.transactionsList}>
-            {transactions.map((transaction) => (
-              <TransactionItem
-                key={transaction.id}
-                category={transaction.category}
-                amount={transaction.amount}
-                icon={transaction.icon}
-              />
-            ))}
-          </View>
-        </View>
-      </ScrollView>
-
-      <View style={styles.bottomNav}>
-        <Icon name="home" size={28} color="#4A90E2" />
-        <Icon name="calendar-blank" size={28} color="#9CA3AF" />
-        <Icon name="heart" size={28} color="#9CA3AF" />
-        <Icon name="account" size={28} color="#9CA3AF" />
-      </View>
+      {loading && transacciones.length === 0 ? (
+        <ActivityIndicator size="large" color="#4A90E2" style={{marginTop: 50}} />
+      ) : (
+        <FlatList
+          data={transacciones}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={renderTransaccion}
+          ListHeaderComponent={HeaderComponent}
+          contentContainerStyle={styles.listContent}
+          showsVerticalScrollIndicator={false}
+          ListEmptyComponent={
+            <View style={styles.emptyState}>
+              <Ionicons name="wallet-outline" size={50} color="#ccc" />
+              <Text style={styles.emptyText}>Sin movimientos recientes</Text>
+              <Text style={styles.emptySubText}>Toca "Nuevo Movimiento" para empezar</Text>
+            </View>
+          }
+        />
+      )}
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F5F5F5',
-  },
-  scrollContent: {
-    paddingHorizontal: 20,
-    paddingBottom: 80,
-  },
-  header: {
-    fontSize: 18,
-    color: '#9CA3AF',
-    marginTop: 20,
-    marginBottom: 30,
-  },
-  iconContainer: {
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  logoImage: {
-    width: 80,
-    height: 80,
-  },
-  greeting: {
-    fontSize: 28,
-    fontWeight: '700',
-    color: '#1F2937',
-    textAlign: 'center',
-    marginBottom: 30,
-  },
-  summaryContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 30,
-    gap: 15,
-  },
-  summaryCard: {
-    flex: 1,
-    backgroundColor: '#FFFFFF',
-    borderRadius: 16,
-    padding: 20,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  summaryLabel: {
-    fontSize: 14,
-    color: '#6B7280',
-    marginBottom: 8,
-    fontWeight: '500',
-  },
-  summaryAmount: {
-    fontSize: 24,
-    fontWeight: '700',
-  },
-  incomeAmount: {
-    color: '#10B981',
-  },
-  expenseAmount: {
-    color: '#EF4444',
-  },
-  transactionsContainer: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 16,
-    padding: 20,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  transactionsHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  transactionsTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#6B7280',
-    marginLeft: 8,
-  },
-  transactionsList: {
-    gap: 15,
-  },
-  transactionItem: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: 12,
-  },
-  transactionLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  iconCircle: {
-    width: 40,
-    height: 40,
+  container: { flex: 1, backgroundColor: '#F5F7FA' },
+  listContent: { padding: 20, paddingBottom: 80 },
+  
+  headerRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20, marginTop: 10 },
+  welcomeText: { fontSize: 14, color: '#666' },
+  userName: { fontSize: 20, fontWeight: 'bold', color: '#333' },
+
+  balanceCard: {
+    backgroundColor: '#4A90E2',
     borderRadius: 20,
-    backgroundColor: '#EFF6FF',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 12,
+    padding: 25,
+    marginBottom: 20,
+    shadowColor: "#4A90E2",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 8,
   },
-  transactionCategory: {
-    fontSize: 16,
-    color: '#6B7280',
-    fontWeight: '500',
-  },
-  transactionAmount: {
-    fontSize: 16,
-    color: '#1F2937',
-    fontWeight: '600',
-  },
-  bottomNav: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
+  balanceLabel: { color: 'rgba(255,255,255,0.9)', fontSize: 14, fontWeight: '500' },
+  balanceTotal: { color: '#FFF', fontSize: 36, fontWeight: 'bold', marginVertical: 10 },
+  balanceRow: { flexDirection: 'row', justifyContent: 'space-between', marginTop: 5 },
+  balanceItem: { flexDirection: 'row', alignItems: 'center' },
+  balanceSubText: { color: '#FFF', fontSize: 12, marginLeft: 5, fontWeight: '500' },
+
+  fabButton: {
+    flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#1F2937',
     paddingVertical: 15,
-    borderTopWidth: 1,
-    borderTopColor: '#E5E7EB',
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
+  historialButton: {
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: '#FFF',
+    paddingVertical: 15,
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
+  },
+  fabText: { color: '#FFF', fontWeight: 'bold', fontSize: 14 },
+
+  sectionTitle: { fontSize: 18, fontWeight: 'bold', color: '#333', marginBottom: 15 },
+
+  cardItem: {
+    backgroundColor: '#FFF',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 15,
+    borderRadius: 12,
+    marginBottom: 10,
+    shadowColor: '#000',
+    shadowOpacity: 0.05,
+    shadowRadius: 5,
+    elevation: 2,
+  },
+  cardLeft: { flexDirection: 'row', alignItems: 'center' },
+  iconCircle: { width: 40, height: 40, borderRadius: 20, justifyContent: 'center', alignItems: 'center', marginRight: 15 },
+  cardCategory: { fontSize: 16, fontWeight: '600', color: '#333' },
+  cardDate: { fontSize: 12, color: '#999', marginTop: 2 },
+  cardAmount: { fontSize: 16, fontWeight: 'bold' },
+
+  emptyState: { alignItems: 'center', marginTop: 40 },
+  emptyText: { fontSize: 18, color: '#666', marginTop: 10, fontWeight: '600' },
+  emptySubText: { fontSize: 14, color: '#999', marginTop: 5 },
 });

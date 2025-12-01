@@ -1,218 +1,161 @@
-import React from 'react';
-import {View,Text,StyleSheet,ScrollView,TextInput,TouchableOpacity,Alert,SafeAreaView, } from 'react-native';
-
+import React, { useState, useCallback } from 'react';
+import { View, Text, StyleSheet, FlatList, TextInput, TouchableOpacity, Alert, SafeAreaView } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useFocusEffect } from '@react-navigation/native';
 
-const mostrarAlertaEliminar = () => {
-  Alert.alert(
-    'Atención',
-    '¿Seguro que deseas eliminar esta transacción?',
-    [
-      { text: 'Cancelar', style: 'cancel' },
-      { text: 'Aceptar', onPress: () => {} },
-    ]
+import { useAuth } from '../context/AuthContext';
+import { TransaccionController } from '../controllers/TransaccionController';
+
+export default function ListadoTransaccionesScreen({ navigation }) {
+  const { user } = useAuth();
+  const controller = new TransaccionController();
+
+  const [lista, setLista] = useState([]);
+  const [filtro, setFiltro] = useState('');
+
+  const cargarDatos = async () => {
+    if (!user) return;
+    try {
+      const datos = await controller.obtenerTodas(user.id);
+      
+      // ORDENAMIENTO ESTRICTO:
+      // 1. Convertimos fechas a objetos Date para comparar correctamente.
+      // 2. Si las fechas son iguales, usamos el ID para que el último creado (mayor ID) salga primero.
+      datos.sort((a, b) => {
+        const fechaA = new Date(a.fecha);
+        const fechaB = new Date(b.fecha);
+        
+        // Comparar fechas (Más reciente primero)
+        if (fechaB.getTime() !== fechaA.getTime()) {
+          return fechaB - fechaA;
+        }
+        
+        // Si es el mismo día, desempatar por ID (Más nuevo primero)
+        return b.id - a.id; 
+      });
+      
+      setLista(datos);
+    } catch (error) {
+      console.error("Error al cargar lista:", error);
+    }
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      cargarDatos();
+    }, [])
   );
-};
 
-const ItemTransaccion = ({ categoria, fecha, monto, tipo }) => {
-  return (
+  const handleEliminar = (id) => {
+    Alert.alert(
+      'Eliminar Transacción',
+      '¿Estás seguro?',
+      [
+        { text: 'Cancelar', style: 'cancel' },
+        { 
+          text: 'Eliminar', 
+          style: 'destructive',
+          onPress: async () => {
+             await controller.eliminarTransaccion(id);
+             cargarDatos(); 
+          }
+        },
+      ]
+    );
+  };
+
+  // Buscador por Categoría o Fecha
+  const datosFiltrados = lista.filter(item => {
+      const termino = filtro.toLowerCase();
+      return (
+        item.categoria.toLowerCase().includes(termino) ||
+        item.fecha.includes(termino)
+      );
+  });
+
+  const renderItem = ({ item }) => (
     <View style={styles.itemCard}>
-      <View>
-        <Text style={styles.itemCategoria}>{categoria}</Text>
-        <Text style={styles.itemFecha}>{fecha}</Text>
+      <View style={{flex: 1}}>
+        <Text style={styles.itemCategoria}>{item.categoria}</Text>
+        <Text style={styles.itemFecha}>{item.fecha}</Text>
+        {item.descripcion ? (
+          <Text style={styles.itemDescripcion} numberOfLines={1}>{item.descripcion}</Text>
+        ) : null}
       </View>
       <View style={styles.itemLadoDerecho}>
-        <Text
-          style={[
+        <Text style={[
             styles.itemMonto,
-            tipo === 'ingreso' ? styles.ingreso : styles.gasto,
+            item.tipo === 'ingreso' ? styles.ingreso : styles.gasto,
           ]}>
-          {tipo === 'ingreso' ? '+' : '-'}${monto.toFixed(2)}
+          {item.tipo === 'ingreso' ? '+' : '-'}${item.monto.toFixed(2)}
         </Text>
         <View style={styles.itemAcciones}>
-          <TouchableOpacity onPress={() => {}}>
-            <Text style={styles.accionTexto}>Editar</Text>
+          <TouchableOpacity 
+            onPress={() => navigation.navigate('EditarTransaccion', { transaccion: item })}
+            style={styles.btnEditar}
+          >
+            <Icon name="pencil" size={20} color="#4A90E2" />
           </TouchableOpacity>
-          <TouchableOpacity onPress={mostrarAlertaEliminar}>
-            <Text style={[styles.accionTexto, styles.gasto]}>Eliminar</Text>
+          <TouchableOpacity onPress={() => handleEliminar(item.id)} style={styles.btnEliminar}>
+            <Icon name="trash-can-outline" size={20} color="#EF4444" />
           </TouchableOpacity>
         </View>
       </View>
     </View>
   );
-};
-export default function ListadoTransaccionesScreen() {
+
   return (
-  
     <SafeAreaView style={styles.safeAreaContainer}>
-    
       <View style={styles.container}>
-        <Text style={styles.titulo}>Listado de Transacciones</Text>
-        <View style={styles.filtrosContainer}>
-          <TextInput
-            style={styles.inputFiltro}
-            placeholder="Filtrar por Categoría"
-            placeholderTextColor="#718096"
-          />
-          <TextInput
-            style={styles.inputFiltro}
-            placeholder="Filtrar por Fecha"
-            placeholderTextColor="#718096"
-          />
-          <TouchableOpacity style={styles.botonPrincipal} onPress={() => {}}>
-            <Text style={styles.botonPrincipalTexto}>Buscar Transacción</Text>
-          </TouchableOpacity>
+        <View style={styles.header}>
+            <TouchableOpacity onPress={() => navigation.goBack()} style={{padding: 5}}>
+                <Icon name="arrow-left" size={24} color="#333" />
+            </TouchableOpacity>
+            <Text style={styles.titulo}>Historial</Text>
         </View>
 
-        <ScrollView style={styles.scroll}>
-          <ItemTransaccion
-            categoria="Comida"
-            fecha="2025-10-30"
-            monto={25.5}
-            tipo="gasto"
+        <View style={styles.filtrosContainer}>
+          <Icon name="magnify" size={20} color="#999" style={styles.iconBusqueda} />
+          <TextInput
+            style={styles.inputFiltro}
+            placeholder="Buscar por categoría o fecha..."
+            placeholderTextColor="#718096"
+            value={filtro}
+            onChangeText={setFiltro}
           />
-          <ItemTransaccion
-            categoria="Salario"
-            fecha="2025-10-29"
-            monto={1200.0}
-            tipo="ingreso"
-          />
-          <ItemTransaccion
-            categoria="Transporte"
-            fecha="2025-10-28"
-            monto={15.0}
-            tipo="gasto"
-          />
-          <ItemTransaccion
-            categoria="Ocio"
-            fecha="2025-10-27"
-            monto={50.0}
-            tipo="gasto"
-          />
-          <ItemTransaccion
-            categoria="Venta"
-            fecha="2025-10-26"
-            monto={75.0}
-            tipo="ingreso"
-          />
-        </ScrollView>
-      </View>
+        </View>
 
-      <View style={styles.bottomNav}>
-        <Icon name="home" size={28} color="#9CA3AF" />
-        <Icon name="calendar-blank" size={28} color="#9CA3AF" />
-        <Icon name="heart" size={28} color="#9CA3AF" />
-        <Icon name="account" size={28} color="#9CA3AF" />
+        <FlatList
+          data={datosFiltrados}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={renderItem}
+          contentContainerStyle={{ paddingBottom: 80 }}
+          ListEmptyComponent={
+            <Text style={{textAlign:'center', marginTop:50, color:'#999'}}>No hay movimientos</Text>
+          }
+        />
       </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-
-  safeAreaContainer: {
-    flex: 1,
-    backgroundColor: '#F4F8FF',
-  },
-  container: {
-    flex: 1, 
-    backgroundColor: '#F4F8FF',
-    paddingHorizontal: 20, 
-    paddingTop: 60,
-    paddingBottom: 80, 
-  },
-  titulo: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#1A202C',
-    marginBottom: 20,
-    textAlign: 'center',
-  },
-  filtrosContainer: {
-    marginBottom: 15,
-  },
-  inputFiltro: {
-    backgroundColor: '#FFFFFF',
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    borderRadius: 8,
-    borderColor: '#E0E0E0',
-    borderWidth: 1,
-    marginBottom: 10,
-    fontSize: 15,
-  },
-  scroll: {
-    flex: 1,
-    width: '100%',
-  },
-  itemCard: {
-    backgroundColor: '#FFFFFF',
-    padding: 15,
-    borderRadius: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 12,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-    elevation: 2,
-  },
-  itemCategoria: {
-    fontSize: 17,
-    fontWeight: '600',
-    color: '#1A202C',
-  },
-  itemFecha: {
-    fontSize: 13,
-    color: '#718096',
-    marginTop: 4,
-  },
-  itemLadoDerecho: {
-    alignItems: 'flex-end',
-  },
-  itemMonto: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  ingreso: {
-    color: '#28a745',
-  },
-  gasto: {
-    color: '#dc3545',
-  },
-  itemAcciones: {
-    flexDirection: 'row',
-    marginTop: 5,
-  },
-  accionTexto: {
-    fontSize: 12,
-    color: '#4A90E2',
-    marginLeft: 10,
-    fontWeight: '600',
-  },
-  botonPrincipal: {
-    width: '100%',
-    backgroundColor: '#a9c7e9ff',
-    padding: 15,
-    borderRadius: 8,
-    alignItems: 'center',
-    marginTop: 10,
-  },
-  botonPrincipalTexto: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-
-  bottomNav: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    paddingVertical: 15,
-    borderTopWidth: 1,
-    borderTopColor: '#E5E7EB',
-  },
+  safeAreaContainer: { flex: 1, backgroundColor: '#F4F8FF' },
+  container: { flex: 1, paddingHorizontal: 20, paddingTop: 10 },
+  header: { flexDirection: 'row', alignItems: 'center', marginBottom: 20, marginTop: 10 },
+  titulo: { fontSize: 28, fontWeight: 'bold', color: '#1A202C', marginLeft: 15 },
+  filtrosContainer: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#FFF', borderRadius: 8, borderWidth: 1, borderColor: '#E0E0E0', marginBottom: 15, paddingHorizontal: 10 },
+  iconBusqueda: { marginRight: 5 },
+  inputFiltro: { flex: 1, paddingVertical: 10, fontSize: 16, color: '#333' },
+  itemCard: { backgroundColor: '#FFFFFF', padding: 15, borderRadius: 12, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12, shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.1, shadowRadius: 3, elevation: 2 },
+  itemCategoria: { fontSize: 16, fontWeight: '600', color: '#1A202C' },
+  itemFecha: { fontSize: 12, color: '#718096', marginTop: 2 },
+  itemDescripcion: { fontSize: 12, color: '#999', fontStyle: 'italic', marginTop: 2 },
+  itemLadoDerecho: { alignItems: 'flex-end' },
+  itemMonto: { fontSize: 16, fontWeight: 'bold', marginBottom: 5 },
+  ingreso: { color: '#10B981' },
+  gasto: { color: '#EF4444' },
+  itemAcciones: { flexDirection: 'row', gap: 15 },
+  btnEditar: { padding: 5 },
+  btnEliminar: { padding: 5 },
 });
