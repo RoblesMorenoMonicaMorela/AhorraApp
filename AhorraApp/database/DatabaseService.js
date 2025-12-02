@@ -8,6 +8,7 @@ class DatabaseService {
     this.storageKeyTrans = 'transacciones_data';
     this.storageKeyPresu = 'presupuestos_data';
   }
+
   async initialize() {
     if (Platform.OS === 'web') {
       console.log('Inicializado en WEB (LocalStorage)');
@@ -49,7 +50,6 @@ class DatabaseService {
           );
         `);
 
-        // MIGRACIÓN: Agregar columnas si no existen (para no borrar datos previos)
         try { await this.db.execAsync('ALTER TABLE usuarios ADD COLUMN telefono TEXT;'); } catch (e) {}
         try { await this.db.execAsync('ALTER TABLE usuarios ADD COLUMN direccion TEXT;'); } catch (e) {}
         try { await this.db.execAsync('ALTER TABLE presupuestos ADD COLUMN fecha TEXT;'); } catch (e) {}
@@ -69,9 +69,6 @@ class DatabaseService {
     localStorage.setItem(key, JSON.stringify(data));
   }
 
-  // ... (MANTÉN LOS MÉTODOS DE USUARIOS Y TRANSACCIONES IGUAL QUE ANTES) ...
-  // Solo copiaré los de USUARIOS y TRANSACCIONES resumidos para que el archivo esté completo si copias todo.
-  
   // --- USUARIOS ---
   async registerUser(n, e, p) {
     const f = new Date().toISOString();
@@ -97,6 +94,36 @@ class DatabaseService {
     } else {
        await this.db.runAsync('UPDATE usuarios SET nombre=?, email=?, telefono=?, direccion=? WHERE id=?', [n,e,t,d,id]);
        const r = await this.db.getAllAsync('SELECT * FROM usuarios WHERE id=?', [id]); return r[0];
+    }
+  }
+
+  // --- NUEVO: RECUPERACIÓN DE CONTRASEÑA ---
+  async checkEmailExists(email) {
+    if (Platform.OS === 'web') {
+      const users = this._getWebData(this.storageKeyUsers);
+      return users.some(u => u.email.toLowerCase() === email.toLowerCase());
+    } else {
+      const result = await this.db.getAllAsync('SELECT id FROM usuarios WHERE email = ?', [email]);
+      return result.length > 0;
+    }
+  }
+
+  async updatePasswordByEmail(email, newPassword) {
+    if (Platform.OS === 'web') {
+      const users = this._getWebData(this.storageKeyUsers);
+      const index = users.findIndex(u => u.email.toLowerCase() === email.toLowerCase());
+      if (index >= 0) {
+        users[index].password = newPassword;
+        this._saveWebData(this.storageKeyUsers, users);
+        return true;
+      }
+      return false;
+    } else {
+      await this.db.runAsync(
+        'UPDATE usuarios SET password = ? WHERE email = ?',
+        [newPassword, email]
+      );
+      return true;
     }
   }
 
@@ -130,20 +157,16 @@ class DatabaseService {
      }
   }
 
-  // --- PRESUPUESTOS (NUEVA LÓGICA COMPLETA) ---
+  // --- PRESUPUESTOS ---
   async getPresupuestos(usuarioId) {
     if (Platform.OS === 'web') {
       const data = this._getWebData(this.storageKeyPresu);
       return data.filter(p => p.usuario_id === usuarioId);
     } else {
-      return await this.db.getAllAsync(
-        'SELECT * FROM presupuestos WHERE usuario_id = ? ORDER BY id DESC', 
-        [usuarioId]
-      );
+      return await this.db.getAllAsync('SELECT * FROM presupuestos WHERE usuario_id = ? ORDER BY id DESC', [usuarioId]);
     }
   }
 
-  // Crear nuevo presupuesto (INSERT)
   async createPresupuesto(usuarioId, categoria, montoMaximo, fecha) {
     if (Platform.OS === 'web') {
       const data = this._getWebData(this.storageKeyPresu);
@@ -151,14 +174,10 @@ class DatabaseService {
       data.push(nuevo);
       this._saveWebData(this.storageKeyPresu, data);
     } else {
-      await this.db.runAsync(
-        'INSERT INTO presupuestos (usuario_id, categoria, monto_maximo, fecha) VALUES (?, ?, ?, ?)',
-        [usuarioId, categoria, montoMaximo, fecha]
-      );
+      await this.db.runAsync('INSERT INTO presupuestos (usuario_id, categoria, monto_maximo, fecha) VALUES (?, ?, ?, ?)', [usuarioId, categoria, montoMaximo, fecha]);
     }
   }
 
-  // Editar presupuesto existente (UPDATE)
   async updatePresupuesto(id, categoria, montoMaximo, fecha) {
     if (Platform.OS === 'web') {
       const data = this._getWebData(this.storageKeyPresu);
@@ -168,10 +187,7 @@ class DatabaseService {
         this._saveWebData(this.storageKeyPresu, data);
       }
     } else {
-      await this.db.runAsync(
-        'UPDATE presupuestos SET categoria = ?, monto_maximo = ?, fecha = ? WHERE id = ?',
-        [categoria, montoMaximo, fecha, id]
-      );
+      await this.db.runAsync('UPDATE presupuestos SET categoria = ?, monto_maximo = ?, fecha = ? WHERE id = ?', [categoria, montoMaximo, fecha, id]);
     }
   }
 

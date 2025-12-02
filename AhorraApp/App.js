@@ -89,6 +89,8 @@ const AppNavigator = () => {
           <Stack.Screen name="Moneda" component={MonedaScreen} />
           <Stack.Screen name="Idioma" component={IdiomaScreen} />
           <Stack.Screen name="CambiarContra" component={CambiarContraScreen} />
+          <Stack.Screen name="Perfil" component={PerfilScreen} />
+
         </>
       ) : (
         // === ZONA PÚBLICA (Sin Loguear) ===
