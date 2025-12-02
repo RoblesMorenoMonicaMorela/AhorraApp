@@ -138,18 +138,72 @@ export default function RegistroScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  safeAreaContainer: { flex: 1, backgroundColor: '#f5f5f5' },
+  safeAreaContainer: { 
+    flex: 1, 
+    backgroundColor: '#f5f5f5' 
+  },
   scrollContainer: { flexGrow: 1 },
-  container: { flex: 1, alignItems: 'center', paddingTop: 20, paddingHorizontal: 20, paddingBottom: 40 },
-  title: { fontSize: 18, color: '#999', marginBottom: 20 },
+  container: { 
+    flex: 1, 
+    alignItems: 'center', 
+    paddingTop: 20, 
+    paddingHorizontal: 20, 
+    paddingBottom: 40 
+  },
+  title: { 
+    fontSize: 18, 
+    color: '#999', 
+    marginBottom: 20 
+  },
   iconContainer: { marginBottom: 20 },
-  piggyBankIcon: { width: 80, height: 80, backgroundColor: '#2196F3', borderRadius: 40, justifyContent: 'center', alignItems: 'center' },
-  logoImage: { width: 50, height: 50 },
-  formContainer: { width: '100%', marginBottom: 20 },
-  label: { fontSize: 14, color: '#333', marginBottom: 5, fontWeight: '500' },
-  input: { backgroundColor: '#e0e0e0', borderRadius: 5, padding: 12, marginBottom: 15, color: '#333' },
-  primaryButton: { backgroundColor: '#1976D2', paddingVertical: 15, borderRadius: 8, width: '100%', alignItems: 'center', marginBottom: 15 },
-  buttonText: { color: 'white', fontSize: 16, fontWeight: '600' },
-  secondaryButton: { padding: 10 },
-  secondaryButtonText: { color: '#1976D2', fontSize: 14, fontWeight: '600' },
+  piggyBankIcon: { 
+    width: 80, 
+    height: 80, 
+    backgroundColor: '#2196F3', 
+    borderRadius: 40, 
+    justifyContent: 'center', 
+    alignItems: 'center' 
+  },
+  logoImage: { 
+    width: 50, 
+    height: 50 
+  },
+  formContainer: { 
+    width: '100%', 
+    marginBottom: 20 
+  },
+  label: { 
+    fontSize: 14, 
+    color: '#333', 
+    marginBottom: 5, 
+    fontWeight: '500' 
+  },
+  input: { 
+    backgroundColor: '#e0e0e0', 
+    borderRadius: 5, 
+    padding: 12, 
+    marginBottom: 15, 
+    color: '#333' 
+  },
+  primaryButton: { 
+    backgroundColor: '#1976D2', 
+    paddingVertical: 15, 
+    borderRadius: 8, 
+    width: '100%', 
+    alignItems: 'center', 
+    marginBottom: 15 
+  },
+  buttonText: { 
+    color: 'white', 
+    fontSize: 16, 
+    fontWeight: '600' 
+  },
+  secondaryButton: { 
+    padding: 10 
+  },
+  secondaryButtonText: { 
+    color: '#1976D2', 
+    fontSize: 14, 
+    fontWeight: '600' 
+  },
 });

@@ -82,14 +82,56 @@ const styles = StyleSheet.create({
     marginBottom: 30 
   },
   iconContainer: { marginBottom: 30 },
-  piggyBankIcon: { width: 100, height: 100, backgroundColor: '#2196F3', borderRadius: 50, justifyContent: 'center', alignItems: 'center' },
-  logoImage: { width: 60, height: 60 },
-  instruction: { fontSize: 14, color: '#666', textAlign: 'center', marginBottom: 30 },
-  formContainer: { width: '100%', marginBottom: 20 },
-  label: { fontSize: 14, color: '#333', marginBottom: 8, fontWeight: '500' },
-  input: { backgroundColor: '#e0e0e0', borderRadius: 5, padding: 12, color: '#333' },
-  primaryButton: { backgroundColor: '#1976D2', paddingVertical: 15, borderRadius: 8, width: '100%', alignItems: 'center', marginBottom: 15 },
-  buttonText: { color: 'white', fontSize: 16, fontWeight: '600' },
+  piggyBankIcon: { 
+    width: 100, 
+    height: 100, 
+    backgroundColor: '#2196F3', 
+    borderRadius: 50, 
+    justifyContent: 'center', 
+    alignItems: 'center' 
+  },
+  logoImage: { 
+    width: 60, 
+    height: 60 
+  },
+  instruction: { 
+    fontSize: 14, 
+    color: '#666', 
+    textAlign: 'center', 
+    marginBottom: 30 
+  },
+  formContainer: { 
+    width: '100%', 
+    marginBottom: 20 
+  },
+  label: { 
+    fontSize: 14, 
+    color: '#333', 
+    marginBottom: 8, 
+    fontWeight: '500' 
+  },
+  input: { 
+    backgroundColor: '#e0e0e0', 
+    borderRadius: 5, 
+    padding: 12, 
+    color: '#333' 
+  },
+  primaryButton: { 
+    backgroundColor: '#1976D2', 
+    paddingVertical: 15, 
+    borderRadius: 8, 
+    width: '100%', 
+    alignItems: 'center', 
+    marginBottom: 15 
+  },
+  buttonText: { 
+    color: 'white', 
+    fontSize: 16, 
+    fontWeight: '600' 
+  },
   secondaryButton: { padding: 10 },
-  secondaryButtonText: { color: '#1976D2', fontSize: 14 },
+  secondaryButtonText: { 
+    color: '#1976D2', 
+    fontSize: 14 
+  },
 });

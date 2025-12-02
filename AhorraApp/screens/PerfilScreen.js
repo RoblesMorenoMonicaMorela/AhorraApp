@@ -173,30 +173,133 @@ export default function PerfilScreen() {
 
 //Seccion de estilos
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#F5F5F5' },
-  scrollContent: { paddingHorizontal: 20, paddingBottom: 100, paddingTop: 20 },
-  iconContainer: { alignItems: 'center', marginBottom: 10 },
-  logoImage: { width: 60, height: 60 },
-  title: { fontSize: 24, fontWeight: 'bold', color: '#4A90E2', textAlign: 'center', marginBottom: 20 },
-  photoContainer: { alignItems: 'center', marginBottom: 20 },
-  photoCircle: { width: 100, height: 100, borderRadius: 50, backgroundColor: '#EFF6FF', justifyContent: 'center', alignItems: 'center', marginBottom: 10 },
+  container: { 
+    flex: 1, 
+    backgroundColor: '#F5F5F5' 
+  },
+  scrollContent: { 
+    paddingHorizontal: 20, 
+    paddingBottom: 100, 
+    paddingTop: 20 
+  },
+  iconContainer: { 
+    alignItems: 'center', 
+    marginBottom: 10 
+  },
+  logoImage: { 
+    width: 60, 
+    height: 60 
+  },
+  title: { 
+    fontSize: 24, 
+    fontWeight: 'bold', 
+    color: '#4A90E2', 
+    textAlign: 'center', 
+    marginBottom: 20 
+  },
+  photoContainer: { 
+    alignItems: 'center', 
+    marginBottom: 20 
+  },
+  photoCircle: { 
+    width: 100, 
+    height: 100, 
+    borderRadius: 50, 
+    backgroundColor: '#EFF6FF', 
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    marginBottom: 10 
+  },
   
-  editButton: { flexDirection:'row', backgroundColor:'#4A90E2', paddingHorizontal: 15, paddingVertical: 8, borderRadius: 20, alignItems: 'center', gap: 5 },
-  editButtonText: { color: '#FFF', fontWeight: 'bold', fontSize: 14 },
+  editButton: { 
+    flexDirection:'row', 
+    backgroundColor:'#4A90E2', 
+    paddingHorizontal: 15, 
+    paddingVertical: 8, 
+    borderRadius: 20, 
+    alignItems: 'center', 
+    gap: 5 
+  },
+  editButtonText: { 
+    color: '#FFF', 
+    fontWeight: 'bold', 
+    fontSize: 14 
+  },
 
-  infoCard: { backgroundColor: '#FFFFFF', borderRadius: 16, padding: 20, marginBottom: 20, elevation: 2 },
-  cardTitle: { fontSize: 18, fontWeight: '600', color: '#1F2937', marginBottom: 20 },
+  infoCard: { 
+    backgroundColor: '#FFFFFF', 
+    borderRadius: 16, 
+    padding: 20, 
+    marginBottom: 20, 
+    elevation: 2 
+  },
+  cardTitle: { 
+    fontSize: 18, 
+    fontWeight: '600', 
+    color: '#1F2937', 
+    marginBottom: 20 
+  },
   
-  fieldContainer: { flexDirection: 'row', alignItems: 'center', marginBottom: 15, borderBottomWidth: 1, borderBottomColor: '#F3F4F6', paddingBottom: 10 },
-  fieldIconContainer: { width: 35, height: 35, borderRadius: 17.5, backgroundColor: '#EFF6FF', justifyContent: 'center', alignItems: 'center', marginRight: 12 },
+  fieldContainer: { 
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    marginBottom: 15, 
+    borderBottomWidth: 1, 
+    borderBottomColor: '#F3F4F6', 
+    paddingBottom: 10 
+  },
+  fieldIconContainer: { 
+    width: 35, 
+    height: 35, 
+    borderRadius: 17.5, 
+    backgroundColor: '#EFF6FF', 
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    marginRight: 12 
+  },
   fieldContent: { flex: 1 },
-  fieldLabel: { fontSize: 12, color: '#6B7280', marginBottom: 2 },
-  fieldValue: { fontSize: 16, color: '#1F2937', fontWeight: '500' },
-  fieldInput: { fontSize: 16, color: '#333', borderBottomWidth:1, borderColor:'#4A90E2', paddingVertical:2, width:'100%' },
+  fieldLabel: { 
+    fontSize: 12, 
+    color: '#6B7280', 
+    marginBottom: 2 
+  },
+  fieldValue: { 
+    fontSize: 16, 
+    color: '#1F2937', 
+    fontWeight: '500' 
+  },
+  fieldInput: { 
+    fontSize: 16, 
+    color: '#333', 
+    borderBottomWidth:1, 
+    borderColor:'#4A90E2', 
+    paddingVertical:2, 
+    width:'100%' 
+  },
 
-  actionBtn: { flex:1, padding:12, borderRadius:8, alignItems:'center' },
-  actionBtnText: { color:'#FFF', fontWeight:'bold' },
+  actionBtn: { 
+    flex:1, 
+    padding:12, 
+    borderRadius:8, 
+    alignItems:'center' 
+  },
+  actionBtnText: { 
+    color:'#FFF', 
+    fontWeight:'bold' 
+  },
 
-  logoutButton: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', backgroundColor: '#FEE2E2', borderRadius: 12, padding: 15 },
-  logoutButtonText: { fontSize: 16, fontWeight: '600', color: '#EF4444', marginLeft: 10 },
+  logoutButton: { 
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    justifyContent: 'center', 
+    backgroundColor: '#FEE2E2', 
+    borderRadius: 12, 
+    padding: 15 
+  },
+  logoutButtonText: { 
+    fontSize: 16, 
+    fontWeight: '600', 
+    color: '#EF4444', 
+    marginLeft: 10 
+  },
 });

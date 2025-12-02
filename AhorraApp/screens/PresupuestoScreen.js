@@ -229,27 +229,126 @@ export default function PresupuestoScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#F5F7FA' },
-  title: { fontSize: 24, fontWeight: 'bold', color: '#333', marginTop: 10 },
-  filterRow: { flexDirection: 'row', gap: 10, marginBottom: 15 },
-  inputFilter: { backgroundColor: '#FFF', padding: 10, borderRadius: 8, borderWidth: 1, borderColor: '#DDD' },
-  btnAdd: { flexDirection:'row', backgroundColor:'#1F2937', padding: 15, borderRadius: 12, alignItems: 'center', justifyContent:'center' },
-  btnAddText: { color: '#FFF', fontWeight: 'bold', marginLeft: 8 },
+  container: { 
+    flex: 1, 
+    backgroundColor: '#F5F7FA' 
+  },
+  title: { 
+    fontSize: 24, 
+    fontWeight: 'bold', 
+    color: '#333', 
+    marginTop: 10 
+  },
+  filterRow: { 
+    flexDirection: 'row', 
+    gap: 10, 
+    marginBottom: 15 
+  },
+  inputFilter: { 
+    
+    backgroundColor: '#FFF', 
+    padding: 10, 
+    borderRadius: 8, 
+    borderWidth: 1, 
+    borderColor: '#DDD' 
+  },
+  btnAdd: { 
+    flexDirection:'row', 
+    backgroundColor:'#1F2937', 
+    padding: 15, 
+    borderRadius: 12, 
+    alignItems: 'center', 
+    justifyContent:'center' 
+  },
+  btnAddText: { 
+    color: '#FFF', 
+    fontWeight: 'bold', 
+    marginLeft: 8 
+  },
   
-  card: { backgroundColor: '#FFF', borderRadius: 12, padding: 15, marginBottom: 15, elevation: 2 },
-  cardHeader: { flexDirection: 'row', alignItems: 'center', marginBottom: 10 },
-  iconBox: { width: 40, height: 40, borderRadius: 20, backgroundColor: '#EFF6FF', justifyContent: 'center', alignItems: 'center' },
-  cardTitle: { fontSize: 16, fontWeight: 'bold', color: '#333' },
-  cardDate: { fontSize: 12, color: '#999' },
-  cardAmount: { fontSize: 18, fontWeight: 'bold', color: '#4A90E2' },
-  cardActions: { flexDirection: 'row', justifyContent: 'flex-end', gap: 20, marginTop: 5 },
+  card: { 
+    backgroundColor: '#FFF', 
+    borderRadius: 12, 
+    padding: 15, 
+    marginBottom: 15, 
+    elevation: 2 
+  },
+  cardHeader: { 
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    marginBottom: 10 
+  },
+  iconBox: { 
+    width: 40, 
+    height: 40, 
+    borderRadius: 20, 
+    backgroundColor: '#EFF6FF', 
+    justifyContent: 'center', 
+    alignItems: 'center' 
+  },
+  cardTitle: { 
+    fontSize: 16, 
+    fontWeight: 'bold', 
+    color: '#333' 
+  },
+  cardDate: { 
+    fontSize: 12, 
+    color: '#999' 
+  },
+  cardAmount: { 
+    fontSize: 18, 
+    fontWeight: 'bold', 
+    color: '#4A90E2' 
+  },
+  cardActions: { 
+    flexDirection: 'row', 
+    justifyContent: 'flex-end', 
+    gap: 20, 
+    marginTop: 5 
+  },
   btnAction: { padding: 5 },
 
-  modalOverlay: { flex: 1, justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.5)', padding: 20 },
-  modalCard: { backgroundColor: '#FFF', borderRadius: 12, padding: 20, elevation: 5 },
-  modalTitle: { fontSize: 20, fontWeight: 'bold', marginBottom: 20, textAlign: 'center' },
-  label: { fontSize: 14, fontWeight: '600', marginBottom: 5, color: '#555' },
-  input: { borderWidth: 1, borderColor: '#DDD', borderRadius: 8, padding: 12, marginBottom: 15, fontSize: 16 },
-  modalActions: { flexDirection: 'row', gap: 10, marginTop: 10 },
-  btnModal: { flex: 1, padding: 15, borderRadius: 8, alignItems: 'center' }
+  modalOverlay: { 
+    flex: 1, 
+    justifyContent: 'center', 
+    backgroundColor: 'rgba(0,0,0,0.5)', 
+    padding: 20 
+  },
+  modalCard: { 
+    backgroundColor: '#FFF', 
+    borderRadius: 12, 
+    padding: 20, 
+    elevation: 5 
+  },
+  modalTitle: { 
+    fontSize: 20, 
+    fontWeight: 'bold', 
+    marginBottom: 20, 
+    textAlign: 'center' 
+  },
+  label: { 
+    fontSize: 14, 
+    fontWeight: '600', 
+    marginBottom: 5, 
+    color: '#555' 
+  },
+  input: { 
+    borderWidth: 1, 
+    borderColor: '#DDD', 
+    borderRadius: 8, 
+    padding: 12, 
+    marginBottom: 15, 
+    fontSize: 16 
+  },
+  modalActions: { 
+    flexDirection: 'row', 
+    gap: 10, 
+    marginTop: 10 
+  },
+  btnModal: { 
+    flex: 1, 
+    padding: 15, 
+    borderRadius: 8, 
+    alignItems: 'center' 
+  }
 });
