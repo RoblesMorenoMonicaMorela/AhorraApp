@@ -3,6 +3,7 @@ import React from 'react';
 import {View,Text,StyleSheet,TouchableOpacity, Image} from 'react-native';
 const LOGO_APP_IMAGE = require('../assets/recursos/Ahorro.png'); 
 export default function MainScreen() {
+  //estilos, contenedores, descripciones, etc.
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Página de Registro</Text>
@@ -40,7 +41,7 @@ export default function MainScreen() {
     </View>
   );
 }
-
+//estilos
 const styles = StyleSheet.create({
   container: {
     flex: 1,

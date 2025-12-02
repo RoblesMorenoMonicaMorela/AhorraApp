@@ -3,14 +3,14 @@ import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, Ima
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const LOGO_APP_IMAGE = require('../assets/recursos/Ahorro.png');
-
+//Para pantalla home
 export default function HomeScreen() {
   const transactions = [
     { id: 1, category: 'Alimentación', amount: -50.0, icon: 'food' },
     { id: 2, category: 'Transporte', amount: -20.0, icon: 'car' },
     { id: 3, category: 'Ocio', amount: -30.0, icon: 'gamepad-variant' },
   ];
-
+//Losta de transacciones
   const TransactionItem = ({ category, amount, icon }) => (
     <TouchableOpacity style={styles.transactionItem}>
       <View style={styles.transactionLeft}>
@@ -22,7 +22,7 @@ export default function HomeScreen() {
       <Text style={styles.transactionAmount}>{amount.toFixed(2)} €</Text>
     </TouchableOpacity>
   );
-
+//Componente interno
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
@@ -82,7 +82,7 @@ export default function HomeScreen() {
     </SafeAreaView>
   );
 }
-
+//Estilos
 const styles = StyleSheet.create({
   container: {
     flex: 1,

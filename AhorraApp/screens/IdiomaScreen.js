@@ -1,12 +1,12 @@
 import React from 'react';
 import {View,Text,StyleSheet,SafeAreaView,ScrollView,TouchableOpacity, Image,} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
+//importaciones
 const LOGO_APP_IMAGE = require('../assets/recursos/Ahorro.png');
-
+//imagen dentro
 export default function IdiomaScreen() {
   const selectedLanguage = 'es';
-
+//Lenghuajes
   const languages = [
     { code: 'es', name: 'Español', nativeName: 'Español', flag: '🇪🇸' },
     { code: 'en', name: 'English', nativeName: 'English', flag: '🇺🇸' },
@@ -19,7 +19,7 @@ export default function IdiomaScreen() {
   const currentLanguage = languages.find(
     (lang) => lang.code === selectedLanguage
   );
-
+//para cambiar language
   const LanguageItem = ({ item }) => (
     <TouchableOpacity
       style={[
@@ -93,7 +93,7 @@ export default function IdiomaScreen() {
     </SafeAreaView>
   );
 }
-
+//estilos
 const styles = StyleSheet.create({
   container: {
     flex: 1,
