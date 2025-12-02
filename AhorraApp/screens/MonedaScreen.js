@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const LOGO_APP_IMAGE = require('../assets/recursos/Ahorro.png');
 
+//Funcion MonedaScreen nos muestra las opciones de cambio de moneda
 export default function MonedaScreen({ navigation }) {
   const currencies = [
     { code: 'USD', name: 'Dólar estadounidense', flag: '🇺🇸', symbol: '$' },
@@ -68,7 +69,7 @@ export default function MonedaScreen({ navigation }) {
     </SafeAreaView>
   );
 }
-
+ //Seccion de estilos
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const LOGO_APP_IMAGE = require('../assets/recursos/Ahorro.png'); 
 
+//Funcion que muestra las Transacciones
 export default function TransaccionesScreen(){
     return(
     <SafeAreaView style={styles.container}>
@@ -54,6 +55,7 @@ export default function TransaccionesScreen(){
     );
 }
 
+//Seccion de Estilos
 const styles = StyleSheet.create({
   container: {
     flex: 1,

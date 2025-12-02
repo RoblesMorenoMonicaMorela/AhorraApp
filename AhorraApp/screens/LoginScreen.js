@@ -1,9 +1,39 @@
-import React from 'react';
-import {View,Text,TextInput, StyleSheet,TouchableOpacity,  ScrollView,Image,SafeAreaView,} from'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import React, { useState } from 'react';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView, Image, SafeAreaView, Alert, ActivityIndicator } from 'react-native';
+import { useAuth } from '../context/AuthContext';
+
 const LOGO_APP_IMAGE = require('../assets/recursos/Ahorro.png');
 
-export default function LoginScreen() {
+//Funcion LogInScreen (muestra la pantalla de registro/entrada)
+export default function LoginScreen({ navigation }) {
+  const { login } = useAuth();
+  
+  // Estado local para spinner
+  const [localLoading, setLocalLoading] = useState(false);
+  
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = async () => {
+    if (!email.trim() || !password.trim()) {
+      Alert.alert("Campos vacíos", "Por favor ingresa tu correo y contraseña.");
+      return;
+    }
+
+    setLocalLoading(true);
+    try {
+      await login(email, password);
+      // Éxito: App.js cambiará la pantalla automáticamente
+    } catch (error) {
+      Alert.alert(
+        "Error de Inicio de Sesión", 
+        "Usuario no encontrado o contraseña incorrecta."
+      );
+    } finally {
+      setLocalLoading(false);
+    }
+  };
+//Inicio de Sesion
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -12,14 +42,7 @@ export default function LoginScreen() {
 
           <View style={styles.iconContainer}>
             <View style={styles.piggyBankIcon}>
-              <Image
-                source={LOGO_APP_IMAGE}
-                style={styles.logoImage}
-                resizeMode="contain"
-              />
-            </View>
-            <View style={styles.infoIcon}>
-              <Text style={styles.infoText}>ℹ️</Text>
+              <Image source={LOGO_APP_IMAGE} style={styles.logoImage} resizeMode="contain" />
             </View>
           </View>
 
@@ -30,189 +53,150 @@ export default function LoginScreen() {
             </View>
           </View>
 
-          <Text style={styles.description}>
-            Lleva control de tus{'\n'}gastos!
-          </Text>
-
           <View style={styles.formContainer}>
-            <Text style={styles.label}>Nombre de usuario</Text>
+            <Text style={styles.label}>Correo Electrónico</Text>
             <TextInput
               style={styles.input}
-              placeholder="Escribe aquí"
+              placeholder="ejemplo@correo.com"
               placeholderTextColor="#999"
+              keyboardType="email-address"
+              autoCapitalize="none"
+              value={email}
+              onChangeText={setEmail}
             />
 
             <Text style={styles.label}>Contraseña</Text>
             <TextInput
               style={styles.input}
-              placeholder="Escribe aquí"
+              placeholder="******"
               placeholderTextColor="#999"
               secureTextEntry
+              value={password}
+              onChangeText={setPassword}
             />
           </View>
 
-          <TouchableOpacity style={styles.primaryButton}>
-            <Text style={styles.buttonText}>Ingresar</Text>
+          <TouchableOpacity 
+            style={[styles.primaryButton, localLoading && { opacity: 0.7 }]} 
+            onPress={handleLogin}
+            disabled={localLoading}
+          >
+            {localLoading ? (
+              <ActivityIndicator color="#FFF" />
+            ) : (
+              <Text style={styles.buttonText}>Ingresar</Text>
+            )}
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.secondaryButton}>
+          <TouchableOpacity 
+            style={styles.secondaryButton}
+            onPress={() => navigation.navigate('Recuperar')}
+          >
             <Text style={styles.secondaryButtonText}>Olvidé mi contraseña</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity 
+            style={{marginTop: 20}}
+            onPress={() => navigation.navigate('Registro')}
+          >
+            <Text style={{color: '#1976D2', fontWeight:'600'}}>¿No tienes cuenta? Regístrate</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
-      <View style={styles.bottomNav}>
-        <Icon name="home" size={28} color="#9CA3AF" />
-        <Icon name="calendar-blank" size={28} color="#9CA3AF" />
-        <Icon name="heart" size={28} color="#9CA3AF" />
-        <Icon name="account" size={28} color="#9CA3AF" />
-      </View>
     </SafeAreaView>
   );
 }
-
+//Seccion de estilos
 const styles = StyleSheet.create({
-  safeAreaContainer: {
-    flex: 1,
-    backgroundColor: '#f5f5f5',
+  safeAreaContainer: { 
+    flex: 1, 
+    backgroundColor: '#f5f5f5' 
   },
-  scrollContainer: {
-    flexGrow: 1,
-    backgroundColor: '#f5f5f5',
+  scrollContainer: { flexGrow: 1 },
+  container: { 
+    flex: 1, 
+    alignItems: 'center', 
+    paddingTop: 30, 
+    paddingHorizontal: 20, 
+    paddingBottom: 50 
   },
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    paddingTop: 30,
-    paddingHorizontal: 20,
-    paddingBottom: 100,
+  title: { 
+    fontSize: 18, 
+    color: '#999', 
+    marginBottom: 20 
   },
-  title: {
-    fontSize: 18,
-    color: '#999',
-    marginBottom: 30,
+  iconContainer: { marginBottom: 20 },
+  piggyBankIcon: { 
+    width: 100, 
+    height: 100, 
+    backgroundColor: '#2196F3', 
+    borderRadius: 50, 
+    justifyContent: 'center', 
+    alignItems: 'center' 
   },
-  iconContainer: {
-    position: 'relative',
-    marginBottom: 20,
+  logoImage: { 
+    width: 60, 
+    height: 60 
   },
-  piggyBankIcon: {
-    width: 120,
-    height: 120,
-    backgroundColor: '#2196F3',
-    borderRadius: 60,
-    justifyContent: 'center',
-    alignItems: 'center',
-    overflow: 'hidden',
+  headerCard: { 
+    width: '100%', 
+    marginBottom: 20 
   },
-  logoImage: {
-    width: 80,
-    height: 80,
+  logo: { 
+    fontSize: 28, 
+    fontWeight: 'bold', 
+    color: 'white', 
+    backgroundColor: '#1976D2', 
+    paddingVertical: 10, 
+    textAlign: 'center', 
+    borderTopLeftRadius: 8, 
+    borderTopRightRadius: 8 
   },
-  infoIcon: {
-    position: 'absolute',
-    right: -10,
-    top: 0,
-    width: 30,
-    height: 30,
-    backgroundColor: 'white',
-    borderRadius: 15,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 2,
-    borderColor: '#ddd',
+  subtitle: { 
+    backgroundColor: '#1565C0', 
+    paddingVertical: 8, 
+    borderBottomLeftRadius: 8, 
+    borderBottomRightRadius: 8 
   },
-  infoText: {
-    fontSize: 18,
+  subtitleText: { 
+    color: 'white', 
+    fontSize: 14, 
+    fontWeight: '600', 
+    textAlign: 'center' 
   },
-  headerCard: {
-    width: '100%',
-    marginBottom: 20,
+  formContainer: { 
+    width: '100%', 
+    marginBottom: 20 
   },
-  logo: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: 'white',
-    backgroundColor: '#1976D2',
-    paddingVertical: 15,
-    paddingHorizontal: 20,
-    textAlign: 'center',
-    borderTopLeftRadius: 8,
-    borderTopRightRadius: 8,
+  label: { 
+    fontSize: 14, 
+    color: '#333', 
+    marginBottom: 5, 
+    fontWeight: '500' 
   },
-  subtitle: {
-    backgroundColor: '#1565C0',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderBottomLeftRadius: 8,
-    borderBottomRightRadius: 8,
+  input: { 
+    backgroundColor: '#e0e0e0', 
+    borderRadius: 5, 
+    padding: 12, 
+    marginBottom: 15, 
+    color: '#333' 
   },
-  subtitleText: {
-    color: 'white',
-    fontSize: 14,
-    fontWeight: '600',
-    textAlign: 'center',
+  primaryButton: { 
+    backgroundColor: '#1976D2', 
+    paddingVertical: 15, 
+    borderRadius: 8, 
+    width: '100%', 
+    alignItems: 'center', 
+    marginBottom: 10 
   },
-  description: {
-    fontSize: 16,
-    color: '#333',
-    textAlign: 'center',
-    marginBottom: 25,
-    lineHeight: 24,
-    fontWeight: '500',
+  buttonText: { 
+    color: 'white', 
+    fontSize: 16, 
+    fontWeight: '600' 
   },
-  formContainer: {
-    width: '100%',
-    marginBottom: 25,
-  },
-  label: {
-    fontSize: 14,
-    color: '#333',
-    marginBottom: 8,
-    fontWeight: '500',
-  },
-  input: {
-    backgroundColor: '#e0e0e0',
-    borderRadius: 5,
-    paddingVertical: 12,
-    paddingHorizontal: 15,
-    fontSize: 14,
-    marginBottom: 20,
-    color: '#333',
-  },
-  primaryButton: {
-    backgroundColor: '#1976D2',
-    paddingVertical: 15,
-    paddingHorizontal: 60,
-    borderRadius: 8,
-    marginBottom: 12,
-    width: '100%',
-    alignItems: 'center',
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  secondaryButton: {
-    backgroundColor: '#1565C0',
-    paddingVertical: 12,
-    paddingHorizontal: 40,
-    borderRadius: 8,
-    width: '100%',
-    alignItems: 'center',
-  },
-  secondaryButtonText: {
-    color: 'white',
-    fontSize: 14,
-    fontWeight: '600',
-  },
-  bottomNav: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    paddingVertical: 15,
-    borderTopWidth: 1,
-    borderTopColor: '#E5E7EB',
+  secondaryButton: { padding: 10 },
+  secondaryButtonText: { 
+    color: '#666', 
+    fontSize: 14 
   },
 });

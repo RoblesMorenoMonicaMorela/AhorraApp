@@ -1,15 +1,16 @@
-/* importamos lo necesario */
 import React from 'react';
-import {View,Text,StyleSheet,TouchableOpacity, Image} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
+
+// IMPORTANTE: Verifica que el nombre 'Ahorro.png' coincida EXACTAMENTE 
+// con el nombre del archivo en tu carpeta (mayúsculas/minúsculas).
 const LOGO_APP_IMAGE = require('../assets/recursos/Ahorro.png'); 
-export default function MainScreen() {
-  //estilos, contenedores, descripciones, etc.
+
+export default function MainScreen({ navigation }) { // <--- 1. Recibimos 'navigation' aquí
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Página de Registro</Text>
       
       <View style={styles.iconContainer}>
-        
         <View style={styles.piggyBankIcon}>
           <Image
             source={LOGO_APP_IMAGE}
@@ -31,11 +32,19 @@ export default function MainScreen() {
         Lleva el control de{'\n'}tus gastos!
       </Text>
 
-      <TouchableOpacity style={styles.primaryButton}>
+      {/* BOTÓN INICIAR SESIÓN */}
+      <TouchableOpacity 
+        style={styles.primaryButton}
+        onPress={() => navigation.navigate('Login')} // <--- 2. Agregamos la navegación
+      >
         <Text style={styles.buttonText}>Iniciar Sesión</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.secondaryButton}>
+      {/* BOTÓN REGISTRARSE */}
+      <TouchableOpacity 
+        style={styles.secondaryButton}
+        onPress={() => navigation.navigate('Registro')} // <--- 3. Agregamos la navegación
+      >
         <Text style={styles.buttonText}>Registrarse</Text>
       </TouchableOpacity>
     </View>
@@ -62,7 +71,7 @@ const styles = StyleSheet.create({
   piggyBankIcon: {
     width: 120,
     height: 120,
-    backgroundColor: '#2196F3',
+    backgroundColor: '#2196F3', // Azul de fondo
     borderRadius: 60,
     justifyContent: 'center',
     alignItems: 'center',

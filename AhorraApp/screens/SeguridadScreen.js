@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const LOGO_APP_IMAGE = require('../assets/recursos/Ahorro.png');
 
+//Funcion que muestra la seguridad de la App
 export default function SeguridadScreen() {
   const securityOptions = [
     {
@@ -147,6 +148,7 @@ export default function SeguridadScreen() {
   );
 }
 
+//Seccion de estilos
 const styles = StyleSheet.create({
   container: {
     flex: 1,
