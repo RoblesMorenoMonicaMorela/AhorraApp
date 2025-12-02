@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const LOGO_APP_IMAGE = require('../assets/recursos/Ahorro.png');
 
+//funcion CrearPagoScreen nos da la vista para progamar pagos
 export default function CrearPagoScreen() {
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
@@ -57,6 +58,7 @@ export default function CrearPagoScreen() {
   );
 }
 
+//Seccion de estilos
 const styles = StyleSheet.create({
   safeAreaContainer: {
     flex: 1,

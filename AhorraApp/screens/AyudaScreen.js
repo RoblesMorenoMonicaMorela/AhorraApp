@@ -2,8 +2,9 @@ import React from 'react';
 import {View,Text,StyleSheet,SafeAreaView,ScrollView,TouchableOpacity,Image,} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const LOGO_APP_IMAGE = require('../assets/recursos/Ahorro.png');
+const LOGO_APP_IMAGE = require('../assets/recursos/Ahorro.png');  //imagen del logo de la app
 
+//función AyudaScreen, orienta al usuario con preguntas frecuentes
 export default function AyudaScreen({ navigation }) {
   const faqs = [
     {
@@ -25,7 +26,7 @@ export default function AyudaScreen({ navigation }) {
         'Sí, puedes exportar tus datos en formato CSV o PDF desde la sección de Configuración > Exportar Datos.',
     },
   ];
-
+//Muestra las opciones para "contactarnos" en caso de necesitar ayuda
   const contactOptions = [
     {
       id: 1,
@@ -50,6 +51,8 @@ export default function AyudaScreen({ navigation }) {
     },
   ];
 
+
+    // Componente reutilizable para cada pregunta frecuente
   const FAQItem = ({ item }) => (
     <TouchableOpacity
       style={styles.faqItem}
@@ -61,6 +64,8 @@ export default function AyudaScreen({ navigation }) {
       </View>
     </TouchableOpacity>
   );
+
+   // Componente reutilizable para cada opción de contacto
 
   const ContactOption = ({ item }) => (
     <TouchableOpacity
@@ -141,6 +146,7 @@ export default function AyudaScreen({ navigation }) {
   );
 }
 
+//seccion de estilos
 const styles = StyleSheet.create({
   container: {
     flex: 1,
