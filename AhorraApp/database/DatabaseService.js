@@ -8,7 +8,6 @@ class DatabaseService {
     this.storageKeyTrans = 'transacciones_data';
     this.storageKeyPresu = 'presupuestos_data';
   }
-
   async initialize() {
     if (Platform.OS === 'web') {
       console.log('Inicializado en WEB (LocalStorage)');
