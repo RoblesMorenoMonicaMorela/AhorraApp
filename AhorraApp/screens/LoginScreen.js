@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 
 const LOGO_APP_IMAGE = require('../assets/recursos/Ahorro.png');
 
+//Funcion LogInScreen (muestra la pantalla de registro/entrada)
 export default function LoginScreen({ navigation }) {
   const { login } = useAuth();
   
@@ -32,7 +33,7 @@ export default function LoginScreen({ navigation }) {
       setLocalLoading(false);
     }
   };
-
+//Inicio de Sesion
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -105,7 +106,7 @@ export default function LoginScreen({ navigation }) {
     </SafeAreaView>
   );
 }
-
+//Seccion de estilos
 const styles = StyleSheet.create({
   safeAreaContainer: { flex: 1, backgroundColor: '#f5f5f5' },
   scrollContainer: { flexGrow: 1 },
