@@ -63,12 +63,46 @@ export default function EditarPerfilScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#F5F5F5' },
-  content: { padding: 20 },
-  header: { flexDirection: 'row', alignItems: 'center', marginBottom: 30 },
-  title: { fontSize: 22, fontWeight: 'bold', marginLeft: 15 },
-  label: { fontSize: 14, fontWeight: '600', marginBottom: 5, color: '#555' },
-  input: { backgroundColor: '#FFF', borderRadius: 8, padding: 12, marginBottom: 20, borderWidth: 1, borderColor: '#DDD' },
-  btn: { backgroundColor: '#4A90E2', padding: 15, borderRadius: 10, alignItems: 'center' },
-  btnText: { color: '#FFF', fontWeight: 'bold', fontSize: 16 }
+  container: { 
+    flex: 1, 
+    backgroundColor: '#F5F5F5' 
+  },
+  content: { 
+    padding: 20 
+  },
+  header: { 
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    marginBottom: 30
+   },
+  title: { 
+    fontSize: 22, 
+    fontWeight: 'bold', 
+    marginLeft: 15 
+  },
+  label: { 
+    fontSize: 14, 
+    fontWeight: '600', 
+    marginBottom: 5, 
+    color: '#555' 
+  },
+  input: { 
+    backgroundColor: '#FFF', 
+    borderRadius: 8, 
+    padding: 12, 
+    marginBottom: 20, 
+    borderWidth: 1, 
+    borderColor: '#DDD' 
+  },
+  btn: { 
+    backgroundColor: '#4A90E2', 
+    padding: 15, 
+    borderRadius: 10, 
+    alignItems: 'center'
+   },
+  btnText: { 
+    color: '#FFF', 
+    fontWeight: 'bold', 
+    fontSize: 16
+   }
 });

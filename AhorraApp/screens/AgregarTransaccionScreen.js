@@ -164,19 +164,74 @@ export default function AgregarTransaccionScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  safeAreaContainer: { flex: 1, backgroundColor: '#F4F8FF' },
-  container: { flexGrow: 1, padding: 20, paddingTop: 40 },
-  titulo: { fontSize: 28, fontWeight: 'bold', color: '#1A202C', marginBottom: 30, textAlign: 'center' },
-  label: { fontSize: 16, color: '#333', marginBottom: 8, fontWeight: '600' },
-  input: { backgroundColor: '#FFF', padding: 15, borderRadius: 10, borderWidth: 1, borderColor: '#DDD', marginBottom: 20, fontSize: 16 },
+  safeAreaContainer: { 
+    flex: 1, 
+    backgroundColor: '#F4F8FF'
+   },
+  container: {
+     flexGrow: 1, 
+     padding: 20, 
+     paddingTop: 40 
+    },
+  titulo: { 
+    fontSize: 28, 
+    fontWeight: 'bold',
+    color: '#1A202C', 
+    marginBottom: 30, 
+    textAlign: 'center' 
+  },
+  label: { 
+    fontSize: 16, 
+    color: '#333', 
+    marginBottom: 8, 
+    fontWeight: '600' 
+  },
+  input: { 
+    backgroundColor: '#FFF', 
+    padding: 15, 
+    borderRadius: 10, 
+    borderWidth: 1, 
+    borderColor: '#DDD', 
+    marginBottom: 20, 
+    fontSize: 16 
+  },
   
-  selectorContainer: { flexDirection: 'row', marginBottom: 20, borderRadius: 10, overflow: 'hidden', borderWidth: 1, borderColor: '#DDD' },
-  selectorBoton: { flex: 1, padding: 15, alignItems: 'center' },
+  selectorContainer: { 
+    flexDirection: 'row', 
+    marginBottom: 20, 
+    borderRadius: 10, 
+    overflow: 'hidden', 
+    borderWidth: 1, 
+    borderColor: '#DDD'
+   },
+  selectorBoton: { flex: 1, 
+    padding: 15, 
+    alignItems: 'center'
+   },
   selectorInactivo: { backgroundColor: '#FFF' },
   selectorActivoGasto: { backgroundColor: '#EF4444' },
-  selectorActivoIngreso: { backgroundColor: '#10B981' },
-  selectorTexto: { fontWeight: 'bold', fontSize: 16 },
+  selectorActivoIngreso: { 
+    backgroundColor: '#10B981' 
+  },
+  selectorTexto: { 
+    fontWeight: 'bold', 
+    fontSize: 16 
+  },
 
-  botonPrincipal: { backgroundColor: '#4A90E2', padding: 18, borderRadius: 12, alignItems: 'center', marginTop: 10, shadowColor: "#000", shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.2, elevation: 3 },
-  botonPrincipalTexto: { color: '#FFF', fontSize: 18, fontWeight: 'bold' },
+  botonPrincipal: { 
+    backgroundColor: '#4A90E2', 
+    padding: 18, 
+    borderRadius: 12, 
+    alignItems: 'center', 
+    marginTop: 10, 
+    shadowColor: "#000", 
+    shadowOffset: { width: 0, height: 2 }, 
+    shadowOpacity: 0.2, 
+    elevation: 3 
+  },
+  botonPrincipalTexto: { 
+    color: '#FFF', 
+    fontSize: 18, 
+    fontWeight: 'bold'
+   },
 });
