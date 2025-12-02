@@ -1,9 +1,11 @@
 import React from 'react';
 import {View,Text,StyleSheet,SafeAreaView,ScrollView,TextInput,TouchableOpacity,KeyboardAvoidingView,Platform,Image,} from 'react-native';
-
+//importaciones
 const LOGO_APP_IMAGE = require('../assets/recursos/Ahorro.png');
-
+//Carga de logo y componente principal
 export default function ConfInicialScreen() {
+
+  //safe area y keyboard
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
@@ -94,7 +96,7 @@ export default function ConfInicialScreen() {
     </SafeAreaView>
   );
 }
-
+//estilos
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -1,10 +1,11 @@
 import React from 'react';
 import { View,Text,StyleSheet,SafeAreaView,ScrollView,TouchableOpacity,TextInput,Image,} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
+//importaciones e imagenes
 const LOGO_APP_IMAGE = require('../assets/recursos/Ahorro.png');
-
+//componente principal y scrollview sobre la pantalla
 export default function CambiarContraScreen() {
+  //encabezado
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView
@@ -17,7 +18,7 @@ export default function CambiarContraScreen() {
           <Text style={styles.header}>Seguridad</Text>
           <View style={{ width: 24 }} />
         </View>
-
+        
         <View style={styles.iconContainer}>
           <Image
             source={LOGO_APP_IMAGE}
@@ -76,7 +77,8 @@ export default function CambiarContraScreen() {
     </SafeAreaView>
   );
 }
-
+//titulo principal y formulario
+//Estilos
 const styles = StyleSheet.create({
   container: {
     flex: 1,

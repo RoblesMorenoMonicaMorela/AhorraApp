@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import {View,Text,StyleSheet,SafeAreaView,ScrollView,Image,TextInput,TouchableOpacity,} from 'react-native';
 import Slider from '@react-native-community/slider';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
+//importaciones
 const LOGO_APP_IMAGE = require('../assets/recursos/Ahorro.png');
 
 const EditarPresuScreen = () => {
   const [valorPresupuesto, setValorPresupuesto] = useState(50);
   const MAX_PRESUPUESTO = 2500;
-
+//vista segura para visualizar, botones, tarjetas, etc
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
@@ -68,7 +68,7 @@ const EditarPresuScreen = () => {
     </SafeAreaView>
   );
 };
-
+//Estilos
 const styles = StyleSheet.create({
   container: {
     flex: 1,

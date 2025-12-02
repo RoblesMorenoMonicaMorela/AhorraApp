@@ -1,9 +1,9 @@
 import React from 'react';
 import {View,Text,StyleSheet,SafeAreaView,ScrollView,TouchableOpacity,TextInput,Image,} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
+//importaciones
 const LOGO_APP_IMAGE = require('../assets/recursos/Ahorro.png');
-
+//Datos de perfil simulados
 export default function EditarPerfilScreen({ navigation }) {
   const profile = {
     name: 'Juan Pérez',
@@ -12,7 +12,7 @@ export default function EditarPerfilScreen({ navigation }) {
     birthDate: '15/03/1990',
     address: 'Ciudad de México, México',
   };
-
+//Componente interno
   const ProfileField = ({ icon, label, value }) => (
     <View style={styles.fieldContainer}>
       <View style={styles.fieldIconContainer}>
@@ -24,7 +24,7 @@ export default function EditarPerfilScreen({ navigation }) {
       </View>
     </View>
   );
-
+//Cabeza, logo, perfil, tarjeta, botones inferiores
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView
@@ -105,7 +105,7 @@ export default function EditarPerfilScreen({ navigation }) {
     </SafeAreaView>
   );
 }
-
+//estilos
 const styles = StyleSheet.create({
   container: {
     flex: 1,
