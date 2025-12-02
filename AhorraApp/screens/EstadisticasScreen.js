@@ -153,31 +153,125 @@ export default function EstadisticasScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#F5F7FA' },
-  scrollContent: { paddingHorizontal: 20, paddingBottom: 100 },
-  header: { fontSize: 18, color: '#9CA3AF', fontWeight: 'bold' },
-  title: { fontSize: 24, fontWeight: 'bold', color: '#4A90E2', textAlign: 'center', marginTop: 5 },
+  container: { 
+    flex: 1, 
+    backgroundColor: '#F5F7FA' 
+  },
+  scrollContent: { 
+    paddingHorizontal: 20, 
+    paddingBottom: 100 
+  },
+  header: { 
+    fontSize: 18, 
+    color: '#9CA3AF', 
+    fontWeight: 'bold' 
+  },
+  title: { 
+    fontSize: 24, 
+    fontWeight: 'bold', 
+    color: '#4A90E2', 
+    textAlign: 'center', 
+    marginTop: 5 
+  },
   
-  yearSelector: { flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginBottom: 15 },
-  yearText: { fontSize: 18, fontWeight: 'bold', marginHorizontal: 20, color: '#333' },
+  yearSelector: { 
+    flexDirection: 'row', 
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    marginBottom: 15 
+  },
+  yearText: { 
+    fontSize: 18, 
+    fontWeight: 'bold', 
+    marginHorizontal: 20, 
+    color: '#333' 
+  },
 
   monthContainer: { marginBottom: 20 },
   monthSelector: { flexDirection: 'row' },
-  monthButton: { paddingVertical: 8, paddingHorizontal: 16, borderRadius: 20, backgroundColor: '#FFFFFF', marginRight: 10, borderWidth: 1, borderColor: '#E5E7EB' },
-  monthButtonActive: { backgroundColor: '#4A90E2', borderColor: '#4A90E2' },
-  monthText: { color: '#6B7280', fontWeight: '500' },
-  monthTextActive: { color: '#FFFFFF', fontWeight: 'bold' },
+  monthButton: { 
+    paddingVertical: 8, 
+    paddingHorizontal: 16, 
+    borderRadius: 20, 
+    backgroundColor: '#FFFFFF', 
+    marginRight: 10, 
+    borderWidth: 1, 
+    borderColor: '#E5E7EB' 
+  },
+  monthButtonActive: { 
+    backgroundColor: '#4A90E2', 
+    borderColor: '#4A90E2' 
+  },
+  monthText: { 
+    color: '#6B7280', 
+    fontWeight: '500'
+   },
+  monthTextActive: { 
+    color: '#FFFFFF', 
+    fontWeight: 'bold' 
+  },
 
-  chartCard: { backgroundColor: '#FFFFFF', borderRadius: 16, padding: 20, marginBottom: 20, elevation: 3 },
-  cardHeader: { flexDirection: 'row', alignItems: 'center', marginBottom: 20, borderBottomWidth: 1, borderBottomColor: '#F3F4F6', paddingBottom: 10 },
-  cardTitle: { fontSize: 18, fontWeight: 'bold', color: '#1F2937', marginLeft: 10 },
+  chartCard: { 
+    backgroundColor: '#FFFFFF', 
+    borderRadius: 16, 
+    padding: 20, 
+    marginBottom: 20, 
+    elevation: 3 
+  },
+  cardHeader: { 
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    marginBottom: 20, 
+    borderBottomWidth: 1, 
+    borderBottomColor: '#F3F4F6', 
+    paddingBottom: 10 
+  },
+  cardTitle: { 
+    fontSize: 18, 
+    fontWeight: 'bold', 
+    color: '#1F2937', 
+    marginLeft: 10 
+  },
   
-  chartContainer: { flexDirection: 'row', justifyContent: 'space-around', alignItems: 'flex-end', height: 180, paddingBottom: 10 },
-  barColumn: { alignItems: 'center', justifyContent: 'flex-end', flex: 1, marginHorizontal: 2 },
-  bar: { width: 30, borderRadius: 6, marginBottom: 8 },
-  barValueText: { fontSize: 10, fontWeight: 'bold', color: '#6B7280', marginBottom: 4 },
-  barLabelText: { fontSize: 10, fontWeight: '600', color: '#374151', textAlign: 'center' },
+  chartContainer: { 
+    flexDirection: 'row', 
+    justifyContent: 'space-around', 
+    alignItems: 'flex-end', 
+    height: 180, 
+    paddingBottom: 10 
+  },
+  barColumn: { 
+    alignItems: 'center', 
+    justifyContent: 'flex-end', 
+    flex: 1, 
+    marginHorizontal: 2 
+  },
+  bar: { 
+    width: 30, 
+    borderRadius: 6, 
+    marginBottom: 8 
+  },
+  barValueText: { 
+    fontSize: 10, 
+    fontWeight: 'bold', 
+    color: '#6B7280', 
+    marginBottom: 4 
+  },
+  barLabelText: { 
+    fontSize: 10, 
+    fontWeight: '600', 
+    color: '#374151', 
+    textAlign: 'center' 
+  },
   
-  summaryFooter: { marginTop: 10, paddingTop: 10, borderTopWidth: 1, borderTopColor: '#F3F4F6', alignItems: 'center' },
-  summaryText: { fontSize: 16, color: '#6B7280' },
+  summaryFooter: { 
+    marginTop: 10, 
+    paddingTop: 10, 
+    borderTopWidth: 1, 
+    borderTopColor: '#F3F4F6', 
+    alignItems: 'center' 
+  },
+  summaryText: { 
+    fontSize: 16, 
+    color: '#6B7280' },
 });

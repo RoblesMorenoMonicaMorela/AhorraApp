@@ -108,22 +108,95 @@ export default function LoginScreen({ navigation }) {
 }
 //Seccion de estilos
 const styles = StyleSheet.create({
-  safeAreaContainer: { flex: 1, backgroundColor: '#f5f5f5' },
+  safeAreaContainer: { 
+    flex: 1, 
+    backgroundColor: '#f5f5f5' 
+  },
   scrollContainer: { flexGrow: 1 },
-  container: { flex: 1, alignItems: 'center', paddingTop: 30, paddingHorizontal: 20, paddingBottom: 50 },
-  title: { fontSize: 18, color: '#999', marginBottom: 20 },
+  container: { 
+    flex: 1, 
+    alignItems: 'center', 
+    paddingTop: 30, 
+    paddingHorizontal: 20, 
+    paddingBottom: 50 
+  },
+  title: { 
+    fontSize: 18, 
+    color: '#999', 
+    marginBottom: 20 
+  },
   iconContainer: { marginBottom: 20 },
-  piggyBankIcon: { width: 100, height: 100, backgroundColor: '#2196F3', borderRadius: 50, justifyContent: 'center', alignItems: 'center' },
-  logoImage: { width: 60, height: 60 },
-  headerCard: { width: '100%', marginBottom: 20 },
-  logo: { fontSize: 28, fontWeight: 'bold', color: 'white', backgroundColor: '#1976D2', paddingVertical: 10, textAlign: 'center', borderTopLeftRadius: 8, borderTopRightRadius: 8 },
-  subtitle: { backgroundColor: '#1565C0', paddingVertical: 8, borderBottomLeftRadius: 8, borderBottomRightRadius: 8 },
-  subtitleText: { color: 'white', fontSize: 14, fontWeight: '600', textAlign: 'center' },
-  formContainer: { width: '100%', marginBottom: 20 },
-  label: { fontSize: 14, color: '#333', marginBottom: 5, fontWeight: '500' },
-  input: { backgroundColor: '#e0e0e0', borderRadius: 5, padding: 12, marginBottom: 15, color: '#333' },
-  primaryButton: { backgroundColor: '#1976D2', paddingVertical: 15, borderRadius: 8, width: '100%', alignItems: 'center', marginBottom: 10 },
-  buttonText: { color: 'white', fontSize: 16, fontWeight: '600' },
+  piggyBankIcon: { 
+    width: 100, 
+    height: 100, 
+    backgroundColor: '#2196F3', 
+    borderRadius: 50, 
+    justifyContent: 'center', 
+    alignItems: 'center' 
+  },
+  logoImage: { 
+    width: 60, 
+    height: 60 
+  },
+  headerCard: { 
+    width: '100%', 
+    marginBottom: 20 
+  },
+  logo: { 
+    fontSize: 28, 
+    fontWeight: 'bold', 
+    color: 'white', 
+    backgroundColor: '#1976D2', 
+    paddingVertical: 10, 
+    textAlign: 'center', 
+    borderTopLeftRadius: 8, 
+    borderTopRightRadius: 8 
+  },
+  subtitle: { 
+    backgroundColor: '#1565C0', 
+    paddingVertical: 8, 
+    borderBottomLeftRadius: 8, 
+    borderBottomRightRadius: 8 
+  },
+  subtitleText: { 
+    color: 'white', 
+    fontSize: 14, 
+    fontWeight: '600', 
+    textAlign: 'center' 
+  },
+  formContainer: { 
+    width: '100%', 
+    marginBottom: 20 
+  },
+  label: { 
+    fontSize: 14, 
+    color: '#333', 
+    marginBottom: 5, 
+    fontWeight: '500' 
+  },
+  input: { 
+    backgroundColor: '#e0e0e0', 
+    borderRadius: 5, 
+    padding: 12, 
+    marginBottom: 15, 
+    color: '#333' 
+  },
+  primaryButton: { 
+    backgroundColor: '#1976D2', 
+    paddingVertical: 15, 
+    borderRadius: 8, 
+    width: '100%', 
+    alignItems: 'center', 
+    marginBottom: 10 
+  },
+  buttonText: { 
+    color: 'white', 
+    fontSize: 16, 
+    fontWeight: '600' 
+  },
   secondaryButton: { padding: 10 },
-  secondaryButtonText: { color: '#666', fontSize: 14 },
+  secondaryButtonText: { 
+    color: '#666', 
+    fontSize: 14 
+  },
 });

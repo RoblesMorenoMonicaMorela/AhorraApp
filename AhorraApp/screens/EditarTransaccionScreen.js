@@ -92,18 +92,65 @@ export default function EditarTransaccionScreen({ route, navigation }) {
 
 // ... (Usa los mismos estilos de AgregarTransaccionScreen para mantener consistencia) ...
 const styles = StyleSheet.create({
-  safeAreaContainer: { flex: 1, backgroundColor: '#F4F8FF' },
-  container: { flexGrow: 1, padding: 20, paddingTop: 40 },
-  titulo: { fontSize: 24, fontWeight: 'bold', marginBottom: 20, textAlign:'center' },
-  label: { marginBottom: 5, fontWeight: '500' },
-  input: { backgroundColor: '#fff', borderWidth: 1, borderColor: '#ddd', borderRadius: 8, padding: 10, marginBottom: 15 },
-  selectorContainer: { flexDirection: 'row', marginBottom: 20 },
-  selectorBoton: { flex: 1, padding: 10, alignItems: 'center', borderWidth: 1, borderColor: '#ddd' },
-  selectorActivoGasto: { backgroundColor: '#dc3545', borderColor: '#dc3545' },
-  selectorActivoIngreso: { backgroundColor: '#28a745', borderColor: '#28a745' },
+  safeAreaContainer: { 
+    flex: 1, 
+    backgroundColor: '#F4F8FF' 
+  },
+  container: { 
+    flexGrow: 1, 
+    padding: 20, 
+    paddingTop: 40 
+  },
+  titulo: { 
+    fontSize: 24, 
+    fontWeight: 'bold', 
+    marginBottom: 20, 
+    textAlign:'center' 
+  },
+  label: { 
+    marginBottom: 5, 
+    fontWeight: '500'
+   },
+  input: {
+    backgroundColor: '#fff',
+    borderWidth: 1, 
+    borderColor: '#ddd', 
+    borderRadius: 8, 
+    padding: 10, 
+    marginBottom: 15 
+  },
+  selectorContainer: { 
+    flexDirection: 'row', 
+    marginBottom: 20 
+  },
+  selectorBoton: { 
+    flex: 1, 
+    padding: 10, 
+    alignItems: 'center', 
+    borderWidth: 1, 
+    borderColor: '#ddd' 
+  },
+  selectorActivoGasto: { 
+    backgroundColor: '#dc3545', 
+    borderColor: '#dc3545' 
+  },
+  selectorActivoIngreso: { 
+    backgroundColor: '#28a745', 
+    borderColor: '#28a745' 
+  },
   selectorInactivo: { backgroundColor: '#fff' },
-  selectorTextoActivo: { color: '#fff', fontWeight: 'bold' },
+  selectorTextoActivo: { 
+    color: '#fff', 
+    fontWeight: 'bold' 
+  },
   selectorTextoInactivo: { color: '#666' },
-  botonPrincipal: { backgroundColor: '#4A90E2', padding: 15, borderRadius: 8, alignItems: 'center' },
-  botonPrincipalTexto: { color: '#fff', fontWeight: 'bold' }
+  botonPrincipal: { 
+    backgroundColor: '#4A90E2', 
+    padding: 15, 
+    borderRadius: 8, 
+    alignItems: 'center' 
+  },
+  botonPrincipalTexto: { 
+    color: '#fff', 
+    fontWeight: 'bold' }
 });

@@ -65,10 +65,22 @@ export default function OlvidarContraScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  safeAreaContainer: { flex: 1, backgroundColor: '#f5f5f5' },
+  safeAreaContainer: { 
+    flex: 1, 
+    backgroundColor: '#f5f5f5' 
+  },
   scrollContainer: { flexGrow: 1 },
-  container: { flex: 1, alignItems: 'center', paddingTop: 40, paddingHorizontal: 20 },
-  title: { fontSize: 18, color: '#999', marginBottom: 30 },
+  container: { 
+    flex: 1, 
+    alignItems: 'center', 
+    paddingTop: 40, 
+    paddingHorizontal: 20 
+  },
+  title: { 
+    fontSize: 18, 
+    color: '#999', 
+    marginBottom: 30 
+  },
   iconContainer: { marginBottom: 30 },
   piggyBankIcon: { width: 100, height: 100, backgroundColor: '#2196F3', borderRadius: 50, justifyContent: 'center', alignItems: 'center' },
   logoImage: { width: 60, height: 60 },

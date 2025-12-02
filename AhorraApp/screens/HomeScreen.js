@@ -174,12 +174,31 @@ export default function HomeScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#F5F7FA' },
-  listContent: { padding: 20, paddingBottom: 80 },
+  container: { 
+    flex: 1, 
+    backgroundColor: '#F5F7FA' 
+  },
+  listContent: { 
+    padding: 20, 
+    paddingBottom: 80 
+  },
   
-  headerRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20, marginTop: 10 },
-  welcomeText: { fontSize: 14, color: '#666' },
-  userName: { fontSize: 20, fontWeight: 'bold', color: '#333' },
+  headerRow: { 
+    flexDirection: 'row', 
+    justifyContent: 'space-between', 
+    alignItems: 'center', 
+    marginBottom: 20, 
+    marginTop: 10 
+  },
+  welcomeText: { 
+    fontSize: 14, 
+    color: '#666' 
+  },
+  userName: { 
+    fontSize: 20, 
+    fontWeight: 'bold', 
+    color: '#333' 
+  },
 
   balanceCard: {
     backgroundColor: '#4A90E2',
@@ -192,11 +211,32 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     elevation: 8,
   },
-  balanceLabel: { color: 'rgba(255,255,255,0.9)', fontSize: 14, fontWeight: '500' },
-  balanceTotal: { color: '#FFF', fontSize: 36, fontWeight: 'bold', marginVertical: 10 },
-  balanceRow: { flexDirection: 'row', justifyContent: 'space-between', marginTop: 5 },
-  balanceItem: { flexDirection: 'row', alignItems: 'center' },
-  balanceSubText: { color: '#FFF', fontSize: 12, marginLeft: 5, fontWeight: '500' },
+  balanceLabel: { 
+    color: 'rgba(255,255,255,0.9)', 
+    fontSize: 14, 
+    fontWeight: '500' 
+  },
+  balanceTotal: { 
+    color: '#FFF', 
+    fontSize: 36, 
+    fontWeight: 'bold', 
+    marginVertical: 10 
+  },
+  balanceRow: { 
+    flexDirection: 'row', 
+    justifyContent: 'space-between', 
+    marginTop: 5 
+  },
+  balanceItem: { 
+    flexDirection: 'row', 
+    alignItems: 'center' 
+  },
+  balanceSubText: { 
+    color: '#FFF', 
+    fontSize: 12, 
+    marginLeft: 5, 
+    fontWeight: '500' 
+  },
 
   fabButton: {
     flex: 1,
@@ -223,9 +263,18 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#E5E7EB',
   },
-  fabText: { color: '#FFF', fontWeight: 'bold', fontSize: 14 },
+  fabText: { 
+    color: '#FFF', 
+    fontWeight: 'bold', 
+    fontSize: 14 
+  },
 
-  sectionTitle: { fontSize: 18, fontWeight: 'bold', color: '#333', marginBottom: 15 },
+  sectionTitle: { 
+    fontSize: 18, 
+    fontWeight: 'bold', 
+    color: '#333', 
+    marginBottom: 15 
+  },
 
   cardItem: {
     backgroundColor: '#FFF',
@@ -240,13 +289,46 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     elevation: 2,
   },
-  cardLeft: { flexDirection: 'row', alignItems: 'center' },
-  iconCircle: { width: 40, height: 40, borderRadius: 20, justifyContent: 'center', alignItems: 'center', marginRight: 15 },
-  cardCategory: { fontSize: 16, fontWeight: '600', color: '#333' },
-  cardDate: { fontSize: 12, color: '#999', marginTop: 2 },
-  cardAmount: { fontSize: 16, fontWeight: 'bold' },
+  cardLeft: { 
+    flexDirection: 'row', 
+    alignItems: 'center' 
+  },
+  iconCircle: { 
+    width: 40, 
+    height: 40, 
+    borderRadius: 20, 
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    marginRight: 15 
+  },
+  cardCategory: { 
+    fontSize: 16, 
+    fontWeight: '600', 
+    color: '#333' 
+  },
+  cardDate: { 
+    fontSize: 12, 
+    color: '#999', 
+    marginTop: 2 
+  },
+  cardAmount: { 
+    fontSize: 16, 
+    fontWeight: 'bold' 
+  },
 
-  emptyState: { alignItems: 'center', marginTop: 40 },
-  emptyText: { fontSize: 18, color: '#666', marginTop: 10, fontWeight: '600' },
-  emptySubText: { fontSize: 14, color: '#999', marginTop: 5 },
+  emptyState: { 
+    alignItems: 'center', 
+    marginTop: 40 
+  },
+  emptyText: { 
+    fontSize: 18, 
+    color: '#666', 
+    marginTop: 10, 
+    fontWeight: '600' 
+  },
+  emptySubText: { 
+    fontSize: 14, 
+    color: '#999', 
+    marginTop: 5 
+  },
 });

@@ -142,22 +142,84 @@ export default function ListadoTransaccionesScreen({ navigation }) {
 }
 //Seccion de estilos
 const styles = StyleSheet.create({
-  safeAreaContainer: { flex: 1, backgroundColor: '#F4F8FF' },
-  container: { flex: 1, paddingHorizontal: 20, paddingTop: 10 },
-  header: { flexDirection: 'row', alignItems: 'center', marginBottom: 20, marginTop: 10 },
-  titulo: { fontSize: 28, fontWeight: 'bold', color: '#1A202C', marginLeft: 15 },
-  filtrosContainer: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#FFF', borderRadius: 8, borderWidth: 1, borderColor: '#E0E0E0', marginBottom: 15, paddingHorizontal: 10 },
+  safeAreaContainer: { 
+    flex: 1, 
+    backgroundColor: '#F4F8FF' 
+  },
+  container: { 
+    flex: 1, 
+    paddingHorizontal: 20, 
+    paddingTop: 10 
+  },
+  header: { 
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    marginBottom: 20, 
+    marginTop: 10 
+  },
+  titulo: { 
+    fontSize: 28, 
+    fontWeight: 'bold', 
+    color: '#1A202C', 
+    marginLeft: 15 
+  },
+  filtrosContainer: { 
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    backgroundColor: '#FFF', 
+    borderRadius: 8, 
+    borderWidth: 1, 
+    borderColor: '#E0E0E0', 
+    marginBottom: 15, 
+    paddingHorizontal: 10 
+  },
   iconBusqueda: { marginRight: 5 },
-  inputFiltro: { flex: 1, paddingVertical: 10, fontSize: 16, color: '#333' },
-  itemCard: { backgroundColor: '#FFFFFF', padding: 15, borderRadius: 12, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12, shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.1, shadowRadius: 3, elevation: 2 },
-  itemCategoria: { fontSize: 16, fontWeight: '600', color: '#1A202C' },
-  itemFecha: { fontSize: 12, color: '#718096', marginTop: 2 },
-  itemDescripcion: { fontSize: 12, color: '#999', fontStyle: 'italic', marginTop: 2 },
+  inputFiltro: { 
+    flex: 1, 
+    paddingVertical: 10, 
+    fontSize: 16, 
+    color: '#333' 
+  },
+  itemCard: { 
+    backgroundColor: '#FFFFFF', 
+    padding: 15, 
+    borderRadius: 12, 
+    flexDirection: 'row', 
+    justifyContent: 'space-between', 
+    alignItems: 'center', 
+    marginBottom: 12, 
+    shadowColor: '#000', 
+    shadowOffset: { width: 0, height: 1 }, 
+    shadowOpacity: 0.1, 
+    shadowRadius: 3, 
+    elevation: 2 
+  },
+  itemCategoria: { 
+    fontSize: 16, 
+    fontWeight: '600', 
+    color: '#1A202C' 
+  },
+  itemFecha: { 
+    fontSize: 12, 
+    color: '#718096', 
+    marginTop: 2 
+  },
+  itemDescripcion: { 
+    fontSize: 12, 
+    color: '#999', 
+    fontStyle: 'italic', 
+    marginTop: 2 
+  },
   itemLadoDerecho: { alignItems: 'flex-end' },
-  itemMonto: { fontSize: 16, fontWeight: 'bold', marginBottom: 5 },
+  itemMonto: { fontSize: 16, 
+    fontWeight: 'bold', 
+    marginBottom: 5 
+  },
   ingreso: { color: '#10B981' },
   gasto: { color: '#EF4444' },
-  itemAcciones: { flexDirection: 'row', gap: 15 },
+  itemAcciones: { flexDirection: 'row', 
+    gap: 15 
+  },
   btnEditar: { padding: 5 },
   btnEliminar: { padding: 5 },
 });
