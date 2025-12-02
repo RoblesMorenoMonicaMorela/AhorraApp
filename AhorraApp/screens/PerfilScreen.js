@@ -28,7 +28,7 @@ const EditableField = ({ icon, label, value, onChangeText, keyboardType, isEditi
     </View>
   </View>
 );
-// -------------------------------------------------------------
+//Funcion PerfilScreen nos muestra nuestro perfil
 
 export default function PerfilScreen() {
   const { user, logout, actualizarUsuarioState } = useAuth();
@@ -171,6 +171,7 @@ export default function PerfilScreen() {
   );
 }
 
+//Seccion de estilos
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#F5F5F5' },
   scrollContent: { paddingHorizontal: 20, paddingBottom: 100, paddingTop: 20 },

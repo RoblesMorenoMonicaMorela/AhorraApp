@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const LOGO_APP_IMAGE = require('../assets/recursos/Ahorro.png');
 
+//Función que le permite al usuario personalizar su configuracion
 export default function PersonalizarScreen({ navigation }) {
   const menuItems = [
     {

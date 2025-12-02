@@ -15,6 +15,7 @@ const mostrarAlertaEliminarTodo = () => {
   );
 };
 
+//Funcion NotificationsScreen nos muestra las posibles notificaciones que puede llegar a tener el usuario
 export default function NotificationsScreen() {
   const notifications = [
     {
@@ -78,7 +79,7 @@ export default function NotificationsScreen() {
         return '#F3F4F6';
     }
   };
-
+//Tarjetas de notificacion
   const NotificationCard = ({ notification }) => {
     const icon = getIconForType(notification.type);
     const backgroundColor = getBackgroundForType(notification.type);
@@ -156,6 +157,7 @@ export default function NotificationsScreen() {
   );
 }
 
+//Seccion de estilos
 const styles = StyleSheet.create({
   container: {
     flex: 1,
