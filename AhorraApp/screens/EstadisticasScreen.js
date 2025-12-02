@@ -5,8 +5,9 @@ import { useAuth } from '../context/AuthContext';
 import { TransaccionController } from '../controllers/TransaccionController';
 import { useFocusEffect } from '@react-navigation/native';
 
-const LOGO_APP_IMAGE = require('../assets/recursos/Ahorro.png');
+const LOGO_APP_IMAGE = require('../assets/recursos/Ahorro.png'); //logo de la App
 
+//Funcion EstadisticasScreen nos permite ver las estadísticas generadas con respecto a los datos
 export default function EstadisticasScreen() {
   const { user } = useAuth();
   const controller = new TransaccionController();

@@ -6,6 +6,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import { useAuth } from '../context/AuthContext';
 import { TransaccionController } from '../controllers/TransaccionController';
 
+//Funcion ListadoTransaccionesScreen nos permite ver las transacciones que hay
 export default function ListadoTransaccionesScreen({ navigation }) {
   const { user } = useAuth();
   const controller = new TransaccionController();
@@ -46,6 +47,7 @@ export default function ListadoTransaccionesScreen({ navigation }) {
     }, [])
   );
 
+  //Eliminar Transacciones
   const handleEliminar = (id) => {
     Alert.alert(
       'Eliminar Transacción',
@@ -103,7 +105,7 @@ export default function ListadoTransaccionesScreen({ navigation }) {
       </View>
     </View>
   );
-
+//Historial
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <View style={styles.container}>
@@ -138,7 +140,7 @@ export default function ListadoTransaccionesScreen({ navigation }) {
     </SafeAreaView>
   );
 }
-
+//Seccion de estilos
 const styles = StyleSheet.create({
   safeAreaContainer: { flex: 1, backgroundColor: '#F4F8FF' },
   container: { flex: 1, paddingHorizontal: 20, paddingTop: 10 },

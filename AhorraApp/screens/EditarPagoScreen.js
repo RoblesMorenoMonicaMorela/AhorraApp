@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const LOGO_APP_IMAGE = require('../assets/recursos/Ahorro.png');
 
+//Funcion EditarPagoScreen nos permite editar los pagos que hayamos programado en caso de necesitar un cambio
 export default function EditarPagoScreen() {
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
@@ -60,6 +61,7 @@ export default function EditarPagoScreen() {
   );
 }
 
+//Seccion de estilos
 const styles = StyleSheet.create({
   safeAreaContainer: {
     flex: 1,
